@@ -1,8 +1,8 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Signup from './components/signup/signup';
-import Sidebar from './components/sidebar/sidebar';
-import Navbar from './components/navbar/navbar';
-import Login from './components/login/login';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Signup from "./components/signup/signup";
+import Sidebar from "./components/sidebar/sidebar";
+import Navbar from "./components/navbar/navbar";
+import Login from "./components/login/login";
 
 function Home() {
   return (

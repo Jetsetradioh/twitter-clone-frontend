@@ -4,14 +4,28 @@ import { useNavigate } from "react-router-dom";
 import "./login.css";
 
 const Login = () => {
-  const [user, setUser] = useState({ name: "", password: "" });
+  const [user, setUser] = useState({ name: "", password: "", loggedIn: false });
   const [toggle, setToggle] = useState(true);
   const navigate = useNavigate();
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+    const response = await fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user),
+    });
+    if (response.ok) {
+      const acctiveUser = await response.json();
+      console.log("Inloggad: ", acctiveUser);
+      navigate("/home");
+    } else {
+      const message = await response.json();
+      console.log(message.message);
+      setUser({ name: "", password: "" });
+      setToggle(true);
+    }
     console.log(user);
-    navigate("/home");
   };
 
   return (
