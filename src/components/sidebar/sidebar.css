@@ -1,4 +1,4 @@
-.sidebar {
+.sidebar-sidebar {
     position: fixed;
     top: 20px;
     right: 20px;
@@ -11,37 +11,37 @@
     z-index: 1000;
 }
 
-.title {
+.sidebar-title {
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 15px;
 }
 
-.trend {
+.sidebar-trend {
     margin-bottom: 15px;
     padding-bottom: 10px;
     border-bottom: 1px solid #e6ecf0;
     cursor: pointer;
 }
 
-.meta {
+.sidebar-meta {
     font-size: 12px;
     color: gray;
     display: flex;
     justify-content: space-between;
 }
 
-.topic {
+.sidebar-topic {
     font-size: 14px;
     font-weight: 600;
     margin: 3px 0;
 }
 
-.tweets {
+.sidebar-tweets {
     font-size: 12px;
     color: gray;
 }
 
-.dots {
+.sidebar-dots {
     font-weight: bold;
 }
