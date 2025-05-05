@@ -1,3 +1,4 @@
+/* === Wrapper för hela navbaren till vänster === */
 .navbar {
   position: fixed;
   color: white;
@@ -11,6 +12,7 @@
   padding: 1rem;
 }
 
+/* === Översta delen av navbaren: logo + meny === */
 .navbar-top {
   color: white;
   display: flex;
@@ -18,12 +20,14 @@
   gap: 1rem;
 }
 
+/* === Bildlogotypen (Twitter/X-symbolen) === */
 .navbar-logo-img {
   color: white;
   height: 32px;
   width: auto;
 }
 
+/* === Container för alla menyknapparna (Home, Explore, etc) === */
 .navbar-menu {
   display: flex;
   color: white;
@@ -31,6 +35,13 @@
   gap: 0.5rem;
 }
 
+/* === Aktiv menyknapp (visuellt markerad) === */
+.navbar-item.active {
+  font-weight: bold;
+  color: white;
+}
+
+/* === Enskild menyknapp-styling === */
 .navbar-item {
   display: inline-flex;
   align-items: center;
@@ -47,14 +58,17 @@
   max-width: fit-content;
 }
 
+/* === Hovereffekt på menyknapparna === */
 .navbar-item:hover {
   background-color: #2e2e2e;
 }
 
+/* === Ikonen till vänster om texten i varje menyknapp === */
 .navbar-icon {
   font-size: 1.2rem;
 }
 
+/* === Den blå "Post"-knappen längst ner i navbaren === */
 .post-button {
   background-color: #1a91da;
   color: white;

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./navbar.css";
 
 const Navbar = () => {
+  const [activeItem, setActiveItem] = useState("Home");
+
   const menu = [
     { name: "Home", icon: "🏠" },
     { name: "Explore", icon: "🔍" },
@@ -25,7 +27,13 @@ const Navbar = () => {
         </div>
         <nav className="navbar-menu">
           {menu.map((item) => (
-            <button key={item.name} className="navbar-item">
+            <button
+              key={item.name}
+              className={`navbar-item ${
+                activeItem === item.name ? "active" : ""
+              }`}
+              onClick={() => setActiveItem(item.name)}
+            >
               <span className="navbar-icon">{item.icon}</span>
               <span>{item.name}</span>
             </button>
