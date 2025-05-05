@@ -3,9 +3,9 @@ import Signup from "./components/signup/signup";
 import Sidebar from "./components/sidebar/sidebar";
 import Navbar from "./components/navbar/navbar";
 import Login from "./components/login/login";
-import Home from "./components/home/home"; 
+import Home from "./components/home/home";
 import Feed from "./components/feed/feed";
-import "./App.css"; 
+import "./App.css";
 
 function HomeLayout() {
   return (
@@ -38,4 +38,3 @@ function App() {
 }
 
 export default App;
-

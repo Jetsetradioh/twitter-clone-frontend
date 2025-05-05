@@ -1,35 +1,40 @@
-import React from 'react';
-import './feed.css';
+import React from "react";
+import "./feed.css";
 
 const Feed = () => {
   const posts = [
     {
-      username: 'Existenz.se',
-      handle: '@Existenzse',
-      time: '2h',
-      content: 'Segerdagsfirandet i Sevastopol blir inställt, detta sker pga säkerhetsläget.',
+      username: "Existenz.se",
+      handle: "@Existenzse",
+      time: "2h",
+      content:
+        "Segerdagsfirandet i Sevastopol blir inställt, detta sker pga säkerhetsläget.",
       comments: 1,
       retweets: 40,
-      likes: '5.1K'
+      likes: "5.1K",
+      views: "20.3K",
     },
     {
-      username: 'Karin Andersson',
-      handle: '@karin_dev',
-      time: '3h',
-      content: 'Idag lärde jag mig hur man skapar en REST API med Express och MongoDB 🙌',
+      username: "Karin Andersson",
+      handle: "@karin_dev",
+      time: "3h",
+      content:
+        "Idag lärde jag mig hur man skapar en REST API med Express och MongoDB 🙌",
       comments: 4,
       retweets: 12,
-      likes: 150
+      likes: 150,
+      views: "8.2K",
     },
     {
-      username: 'Arch Linux News',
-      handle: '@arch_news',
-      time: '6h',
-      content: 'Kernel 6.14.5-arch1-1 is now available in the repos. 🎉',
+      username: "Arch Linux News",
+      handle: "@arch_news",
+      time: "6h",
+      content: "Kernel 6.14.5-arch1-1 is now available in the repos. 🎉",
       comments: 2,
       retweets: 30,
-      likes: 380
-    }
+      likes: 380,
+      views: "12.6K",
+    },
   ];
 
   return (
@@ -52,17 +57,22 @@ const Feed = () => {
       </div>
 
       <div className="feed-posts">
-      <p className="feed-show-posts">Show 85 posts</p>
+        <p className="feed-show-posts">Show 85 posts</p>
         {posts.map((post, index) => (
           <div className="post" key={index}>
             <div className="post-header">
-              <strong>{post.username}</strong> <span>{post.handle} · {post.time}</span>
+              <strong>{post.username}</strong>{" "}
+              <span>
+                {post.handle} · {post.time}
+              </span>
             </div>
             <p>{post.content}</p>
             <div className="post-actions">
               <span>💬 {post.comments}</span>
               <span>🔁 {post.retweets}</span>
               <span>❤️ {post.likes}</span>
+              <span>👁️ {post.views}</span>
+              <span>📤</span> {/* share icon */}
             </div>
           </div>
         ))}

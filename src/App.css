@@ -1,18 +1,18 @@
 .app-layout {
-    display: flex;
-    height: 100vh;
-    background-color: #000000; 
-    color: white;
-    font-family: sans-serif;
-  }
+  display: flex;
+  height: 100vh;
+  background-color: #000000;
+  color: white;
+  font-family: sans-serif;
+}
 
-  html, body {
-    background-color: #000;
-    color: #fff;
-    border: none;
-    outline: none;
-    height: 100%;
-    width: 100%;
-    overflow-x: hidden;
-  }
-  
+html,
+body {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  outline: none;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}

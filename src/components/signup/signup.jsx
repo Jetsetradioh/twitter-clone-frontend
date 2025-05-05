@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './signup.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./signup.css";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
+    username: "",
+    email: "",
+    password: "",
   });
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -20,7 +20,7 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Registrering klar', formData);
+    console.log("Registrering klar", formData);
     // plats för API-anrop sen
 
     navigate("/");
@@ -30,7 +30,7 @@ const Signup = () => {
     <div className="signup-container">
       <h2>Registrera dig</h2>
       <form onSubmit={handleSubmit}>
-        <input 
+        <input
           type="text"
           name="username"
           placeholder="Användarnamn"
