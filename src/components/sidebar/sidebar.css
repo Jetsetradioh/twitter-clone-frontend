@@ -1,22 +1,53 @@
-.sidebar-sidebar {
+/* Main */
+.sidebar-wrapper {
     position: fixed;
     top: 20px;
     right: 20px;
     width: 300px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Search bar container */
+.sidebar-search {
+    background-color: white;
+    padding: 0.5rem 0;
+}
+
+.sidebar-search-input {
+    width: 90%;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    border: 1px solid #757575;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.2s ease;
+}
+
+.sidebar-search-input:focus {
+    border-color: #1d9bf0;
+    box-shadow: 0 0 0 2px rgba(29, 155, 240, 0.2);
+}
+
+/* Trends box */
+.sidebar-sidebar {
     background-color: #f7f9f9;
     padding: 15px;
     border-radius: 16px;
     font-family: Arial, sans-serif;
     font-size: 14px;
-    z-index: 1000;
 }
 
+/* Section title */
 .sidebar-title {
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 15px;
 }
 
+/* Individual trend block */
 .sidebar-trend {
     margin-bottom: 15px;
     padding-bottom: 10px;
@@ -24,6 +55,7 @@
     cursor: pointer;
 }
 
+/* Metadata (e.g., “Trending in...”) */
 .sidebar-meta {
     font-size: 12px;
     color: gray;
@@ -31,17 +63,20 @@
     justify-content: space-between;
 }
 
+/* Hashtag or topic */
 .sidebar-topic {
     font-size: 14px;
     font-weight: 600;
     margin: 3px 0;
 }
 
+/* Tweet count */
 .sidebar-tweets {
     font-size: 12px;
     color: gray;
 }
 
+/* Dots icon on the right */
 .sidebar-dots {
     font-weight: bold;
 }
