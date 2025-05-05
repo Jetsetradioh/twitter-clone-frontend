@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import "./login.css";
 
 const Login = () => {
   const [user, setUser] = useState({ name: "", password: "" });
@@ -14,7 +15,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="login-container">
       <h2>Logga in på Twitter</h2>
 
       <form onSubmit={submitHandler}>
