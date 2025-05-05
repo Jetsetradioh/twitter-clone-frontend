@@ -9,8 +9,7 @@ const Feed = () => {
       username: "Existenz.se",
       handle: "@Existenzse",
       time: "2h",
-      content:
-        "Adam har jobbat från 10:00 till midnatt med projektet. Max gick till tandläkaren 14:00 och blev spårlöst försvunnen. Filip försvann vid 17:00. Kvar blev Adam, ensam krigare i kodens mörker. 🧙‍♂️💻🔥",
+      content: `"10:00 — Teamet samlas, alla peppade.\n\n14:00 — Max: 'Ska bara till tandläkaren...'\n14:01 — ✨ Offline forever ✨\n\n17:00 — Filip: 'Snart tillbaka!'\n17:01 — Witness Protection Program?\n\n00:00 — Adam: Typing like it's a boss fight 💥💻\n\nMoral of the story: Trust nobody. Especially tandläkare och 'snart tillbaka'."`,
       comments: 1,
       retweets: 40,
       likes: "5.1K",
@@ -70,7 +69,7 @@ const Feed = () => {
         </div>
       </div>
 
-      <div className="feed-show-posts">Show {posts.length} posts</div>
+      <div className="feed-show-posts">Show 85 posts</div>
 
       <div className="feed-posts">
         {posts.map((post, index) => (

@@ -1,3 +1,4 @@
+/* Feed Container Styles */
 .feed-container {
   display: flex;
   flex-direction: column;
@@ -6,10 +7,11 @@
   width: 100%;
 }
 
+/* Feed Header */
 .feed-header {
   display: flex;
-  justify-content: space-around;
-  border-bottom: 1.5px solid #333;
+  justify-content: space-around; /* Återställ mellanrum mellan tabs */
+  border-bottom: 1px solid #333;
   padding: 0.75rem 1rem;
   position: sticky;
   top: 0;
@@ -18,21 +20,24 @@
   z-index: 10;
 }
 
+/* Tabs */
 .tab {
-  flex: 1;
-  text-align: center;
   background: none;
   border: none;
-  font-size: 1rem;
   padding: 1rem 0;
+  font-size: 1rem;
+  cursor: pointer;
   color: #71767b;
   font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+  flex: none;
+  display: inline-block;
+  text-align: center;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .tab:hover {
   background-color: rgba(255, 255, 255, 0.05);
+  color: #1da1f2;
 }
 
 .tab.active {
@@ -41,6 +46,7 @@
   border-bottom: 2px solid #1da1f2;
 }
 
+/* Post Box */
 .post-box {
   padding: 1rem;
   border-bottom: 1.5px solid #222;
@@ -58,6 +64,7 @@
   outline: none;
 }
 
+/* Post Actions */
 .post-actions {
   display: flex;
   justify-content: space-between;
@@ -105,6 +112,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
+/* Feed Posts Display */
 .feed-show-posts {
   color: #777;
   text-align: center;
@@ -128,6 +136,7 @@
   border-top: none;
 }
 
+/* Feed Layout */
 .feed {
   flex: 1;
   max-width: 600px;
