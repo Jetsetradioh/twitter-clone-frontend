@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import "./feed.css";
 
 const Feed = () => {
+  const [activeTab, setActiveTab] = useState("forYou");
+
   const posts = [
     {
       username: "Existenz.se",
       handle: "@Existenzse",
       time: "2h",
       content:
-        "Segerdagsfirandet i Sevastopol blir inställt, detta sker pga säkerhetsläget.",
+        "Adam har jobbat från 10:00 till midnatt med projektet. Max gick till tandläkaren 14:00 och blev spårlöst försvunnen. Filip försvann vid 17:00. Kvar blev Adam, ensam krigare i kodens mörker. 🧙‍♂️💻🔥",
       comments: 1,
       retweets: 40,
       likes: "5.1K",
@@ -40,8 +42,18 @@ const Feed = () => {
   return (
     <div className="feed">
       <div className="feed-header">
-        <button className="tab active">For you</button>
-        <button className="tab">Following</button>
+        <button
+          className={`tab ${activeTab === "forYou" ? "active" : ""}`}
+          onClick={() => setActiveTab("forYou")}
+        >
+          For you
+        </button>
+        <button
+          className={`tab ${activeTab === "following" ? "active" : ""}`}
+          onClick={() => setActiveTab("following")}
+        >
+          Following
+        </button>
       </div>
 
       <div className="post-box">
@@ -58,7 +70,7 @@ const Feed = () => {
         </div>
       </div>
 
-      <div className="feed-show-posts">Show 85 posts</div>
+      <div className="feed-show-posts">Show {posts.length} posts</div>
 
       <div className="feed-posts">
         {posts.map((post, index) => (
