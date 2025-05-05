@@ -5,35 +5,6 @@
     color: white;
     font-family: sans-serif;
   }
-  
-  nav {
-    width: 260px;
-    padding: 1rem;
-    border-right: 1px solid #333;
-  }
-  
-  .main-layout {
-    display: flex;
-    flex: 1;
-  }
-  
-  .home {
-    flex: 1;
-    padding: 1rem;
-    border-right: 1px solid #333;
-    overflow-y: auto;
-  }
-  
-  .sidebar {
-    width: 350px;
-    padding: 1rem;
-    overflow-y: auto;
-  }
-  
-  .app-layout {
-  display: flex;
-  height: 100vh;
-}
 
   html, body {
     background-color: #000;
