@@ -38,41 +38,44 @@ const Feed = () => {
   ];
 
   return (
-    <div className="feed-container">
+    <div className="feed">
       <div className="feed-header">
         <button className="tab active">For you</button>
         <button className="tab">Following</button>
       </div>
 
       <div className="post-box">
-        <textarea placeholder="What's happening?" />
+        <textarea placeholder="What's happening?" rows="2" />
         <div className="post-actions">
-          <button>🖼️</button>
-          <button>🎁</button>
-          <button>📊</button>
-          <button>😊</button>
-          <button>📅</button>
+          <div className="icon-row">
+            <button>🖼️</button>
+            <button>🎁</button>
+            <button>📊</button>
+            <button>😊</button>
+            <button>📅</button>
+          </div>
           <button className="post-button">Post</button>
         </div>
       </div>
 
+      <div className="feed-show-posts">Show 85 posts</div>
+
       <div className="feed-posts">
-        <p className="feed-show-posts">Show 85 posts</p>
         {posts.map((post, index) => (
           <div className="post" key={index}>
             <div className="post-header">
               <strong>{post.username}</strong>{" "}
-              <span>
+              <span className="handle-time">
                 {post.handle} · {post.time}
               </span>
             </div>
-            <p>{post.content}</p>
+            <p className="post-content">{post.content}</p>
             <div className="post-actions">
               <span>💬 {post.comments}</span>
               <span>🔁 {post.retweets}</span>
               <span>❤️ {post.likes}</span>
               <span>👁️ {post.views}</span>
-              <span>📤</span> {/* share icon */}
+              <span>📤</span>
             </div>
           </div>
         ))}
