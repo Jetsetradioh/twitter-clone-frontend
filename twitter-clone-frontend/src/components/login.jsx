@@ -10,16 +10,18 @@ const Login = () => {
 
   return (
     <div>
-      <h1>Twitter</h1>
+      <h2>Logga in på Twitter</h2>
 
       <form onSubmit={submitHandler}>
         <input
+          required
           type="text"
           placeholder="Username"
           value={user.name}
           onChange={({ target }) => setUser({ ...user, name: target.value })}
         />
         <input
+          required
           type="password"
           placeholder="Password"
           value={user.password}
