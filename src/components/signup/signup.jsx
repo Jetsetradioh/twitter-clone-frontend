@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './signup.css';
 
 const Signup = () => {
@@ -15,10 +16,14 @@ const Signup = () => {
     });
   };
 
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Registrering klar', formData);
     // plats för API-anrop sen
+
+    navigate("/");
   };
 
   return (
