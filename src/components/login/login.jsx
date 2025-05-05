@@ -1,12 +1,24 @@
 import { useState } from "react";
+import "./login.css";
 
 const Login = () => {
-  const [user, setUser] = useState({ name: "", password: "" });
+  const [user, setUser] = useState({ name: "", password: "", loggedIn: false });
   const [toggle, setToggle] = useState(true);
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(user);
+    const response = await fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user),
+    });
+    if (response.ok) {
+      const acctiveUser = await response.json();
+      console.log("Inloggad: ", acctiveUser);
+    } else {
+      const message = await response.json();
+      console.log(message.message);
+    }
   };
 
   return (
