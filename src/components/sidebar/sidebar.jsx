@@ -5,11 +5,14 @@ const Sidebar = () => {
   return (
     <div className="sidebar-wrapper">
       <div className="sidebar-search">
-        <input
-          type="text"
-          placeholder="Search"
-          className="sidebar-search-input"
-        />
+        <div className="search-wrapper">
+          <span className="search-icon">🔍</span>
+          <input
+            type="text"
+            placeholder="Search"
+            className="sidebar-search-input"
+          />
+        </div>
       </div>
 
       <div className="sidebar-sidebar">

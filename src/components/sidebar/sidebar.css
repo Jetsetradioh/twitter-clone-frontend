@@ -1,8 +1,8 @@
-/* Main */
+/* --- SIDEBAR WRAPPER --- */
 .sidebar-wrapper {
   position: fixed;
   top: 20px;
-  right: 20px;
+  right: 220px;
   width: 300px;
   z-index: 1000;
   display: flex;
@@ -10,15 +10,31 @@
   gap: 1rem;
 }
 
-/* Search bar container */
-.sidebar-search {
-  background-color: rgb(0, 0, 0);
-  padding: 0.5rem 0;
+/* --- SEARCH BAR --- */
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: #000; /* matchar hela sök-sektionen */
 }
 
+/* --- SÖKIKON --- */
+.search-icon {
+  position: absolute;
+  left: 16px;
+  color: #8899a6;
+  font-size: 1rem;
+  pointer-events: none;
+}
+
+/* --- SÖKFÄLT --- */
 .sidebar-search-input {
-  width: 90%;
-  padding: 0.5rem 1rem;
+  background-color: #000;
+  color: #fff;
+  font-weight: bold;
+  width: 100%;
+  padding: 0.5rem 1rem 0.5rem 2.5rem; /* lämna plats för ikon */
   border-radius: 9999px;
   border: 1px solid #757575;
   font-size: 1rem;
@@ -26,28 +42,36 @@
   transition: border 0.2s ease;
 }
 
+/* --- PLACEHOLDER I INPUT --- */
+.sidebar-search-input::placeholder {
+  color: #fff;
+  font-weight: bold;
+  opacity: 1;
+}
+
+/* --- INPUT FOKUS --- */
 .sidebar-search-input:focus {
   border-color: #1d9bf0;
   box-shadow: 0 0 0 2px rgba(29, 155, 240, 0.2);
 }
 
-/* Trends box */
+/* --- TRENDSEKTION --- */
 .sidebar-sidebar {
-  background-color: #000000;
+  background-color: #000;
   padding: 15px;
   border-radius: 16px;
   font-family: Arial, sans-serif;
   font-size: 14px;
 }
 
-/* Section title */
+/* --- TRENDTITEL --- */
 .sidebar-title {
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 15px;
 }
 
-/* Individual trend block */
+/* --- EN TREND-RAD --- */
 .sidebar-trend {
   margin-bottom: 15px;
   padding-bottom: 10px;
@@ -55,28 +79,28 @@
   cursor: pointer;
 }
 
-/* Metadata (e.g., “Trending in...”) */
+/* --- TRENDMETA (PLACERING) --- */
 .sidebar-meta {
   font-size: 12px;
-  color: rgb(255, 255, 255);
+  color: #fff;
   display: flex;
   justify-content: space-between;
 }
 
-/* Hashtag or topic */
+/* --- HASHTAG/TOPIC --- */
 .sidebar-topic {
   font-size: 14px;
   font-weight: 600;
   margin: 3px 0;
 }
 
-/* Tweet count */
+/* --- ANTAL TWEETS --- */
 .sidebar-tweets {
   font-size: 12px;
-  color: rgb(255, 255, 255);
+  color: #fff;
 }
 
-/* Dots icon on the right */
+/* --- "..." MENY --- */
 .sidebar-dots {
   font-weight: bold;
 }
