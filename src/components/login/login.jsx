@@ -18,12 +18,14 @@ const Login = () => {
     if (response.ok) {
       const acctiveUser = await response.json();
       console.log("Inloggad: ", acctiveUser);
+      navigate("/home");
     } else {
       const message = await response.json();
       console.log(message.message);
+      setUser({ name: "", password: "" });
+      setToggle(true);
     }
     console.log(user);
-    navigate("/home");
   };
 
   return (
