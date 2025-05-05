@@ -48,11 +48,11 @@ const Feed = () => {
         <textarea placeholder="What's happening?" rows="2" />
         <div className="post-actions">
           <div className="icon-row">
-            <button>🖼️</button>
-            <button>🎁</button>
-            <button>📊</button>
-            <button>😊</button>
-            <button>📅</button>
+            <button className="icon-button">🖼️</button>
+            <button className="icon-button">🎁</button>
+            <button className="icon-button">📊</button>
+            <button className="icon-button">😊</button>
+            <button className="icon-button">📅</button>
           </div>
           <button className="post-button">Post</button>
         </div>
