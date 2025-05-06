@@ -6,26 +6,49 @@ import "./login.css";
 const Login = () => {
   const [user, setUser] = useState({ name: "", password: "", loggedIn: false });
   const [toggle, setToggle] = useState(true);
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
+
+  const clickHandler = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/checkUser", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user),
+      });
+      if (response.ok) {
+        setToggle((...prev) => !prev);
+      } else {
+        setUser({ name: "", password: "" });
+        setError(true);
+        const data = await response.json();
+        console.log(data.message);
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:3000/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
-    });
-    if (response.ok) {
-      const acctiveUser = await response.json();
-      console.log("Inloggad: ", acctiveUser);
-      navigate("/home");
-    } else {
-      const message = await response.json();
-      console.log(message.message);
-      setUser({ name: "", password: "" });
-      setToggle(true);
+    try {
+      const resp = await fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user),
+      });
+      if (resp.ok) {
+        console.log("good");
+        navigate("/home");
+      }
+      if (!resp.ok) {
+        const data = await resp.json();
+        setError(true);
+        console.log(data.message);
+      }
+    } catch (error) {
+      console.error(error.message);
     }
-    console.log(user);
   };
 
   return (
@@ -36,6 +59,9 @@ const Login = () => {
         {toggle ? (
           <input
             type="text"
+            style={{
+              border: error ? "2px solid red" : "1px solid #ccc",
+            }}
             placeholder="Username"
             value={user.name}
             onChange={({ target }) => setUser({ ...user, name: target.value })}
@@ -43,6 +69,9 @@ const Login = () => {
         ) : (
           <input
             type="password"
+            style={{
+              border: error ? "2px solid red" : "1px solid #ccc",
+            }}
             placeholder="Password"
             value={user.password}
             onChange={({ target }) =>
@@ -50,8 +79,16 @@ const Login = () => {
             }
           />
         )}
+        {error ? (
+          <span style={{ color: "red" }}>Wrong username or password!!</span>
+        ) : (
+          ""
+        )}
+
         {toggle ? (
-          <button onClick={() => setToggle((...prev) => !prev)}>Nästa</button>
+          <button type="button" onClick={clickHandler}>
+            Nästa
+          </button>
         ) : (
           <input type="submit" value="Login"></input>
         )}
