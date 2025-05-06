@@ -11,7 +11,7 @@ const Login = () => {
 
   const clickHandler = async () => {
     try {
-      const response = await fetch("http://localhost:3000/checkUser", {
+      const response = await fetch("http://localhost:3000/api/checkUser", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
@@ -32,7 +32,7 @@ const Login = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const resp = await fetch("http://localhost:3000/login", {
+      const resp = await fetch("http://localhost:3000/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
@@ -80,7 +80,7 @@ const Login = () => {
           />
         )}
         {error ? (
-          <span style={{ color: "red" }}>Wrong username or password!!</span>
+          <span style={{ color: "red" }}>Wrong username or password!</span>
         ) : (
           ""
         )}
