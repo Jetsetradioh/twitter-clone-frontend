@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import "./feed.css";
 
 const Feed = () => {
+  // Håller reda på vilken tabb som är aktiv (For you eller Following)
   const [activeTab, setActiveTab] = useState("forYou");
 
+  // Hårdkodade inlägg som visas i flödet
   const posts = [
     {
       username: "Existenz.se",
@@ -40,6 +42,7 @@ const Feed = () => {
 
   return (
     <div className="feed">
+      {/* Tabb för att växla mellan 'For you' och 'Following' */}
       <div className="feed-header">
         <button
           className={`tab ${activeTab === "forYou" ? "active" : ""}`}
@@ -55,6 +58,7 @@ const Feed = () => {
         </button>
       </div>
 
+      {/* Posta nytt inlägg */}
       <div className="post-box">
         <textarea placeholder="What's happening?" rows="2" />
         <div className="post-actions">

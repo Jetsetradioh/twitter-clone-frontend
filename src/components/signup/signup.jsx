@@ -3,15 +3,19 @@ import { useNavigate, Link } from "react-router-dom";
 import "./signup.css";
 
 const Signup = () => {
+  // Hanterar formulärdata i state
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
     verifyPassword: "",
   });
+
+  // Felmeddelande visas om något går fel
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  // Uppdaterar state när användaren skriver i inputfält
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -26,6 +30,7 @@ const Signup = () => {
     }
 
     try {
+      // Skicka POST-request till backend med användardata
       const res = await fetch("http://localhost:3000/api/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -59,6 +64,7 @@ const Signup = () => {
 
       {error && <p className="error">{error}</p>}
 
+      {/* Registreringsformuläret */}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
