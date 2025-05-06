@@ -17,6 +17,7 @@ const Login = () => {
         body: JSON.stringify(user),
       });
       if (response.ok) {
+        setError(false);
         setToggle((...prev) => !prev);
       } else {
         setUser({ name: "", password: "" });
@@ -38,7 +39,8 @@ const Login = () => {
         body: JSON.stringify(user),
       });
       if (resp.ok) {
-        console.log("good");
+        setError(false);
+
         navigate("/home");
       }
       if (!resp.ok) {
@@ -53,7 +55,11 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <img src="https://www.omnicoreagency.com/wp-content/uploads/2015/10/Twitter-Logo.png.webp" alt="twitter" className="login-img" />
+      <img
+        src="https://www.omnicoreagency.com/wp-content/uploads/2015/10/Twitter-Logo.png.webp"
+        alt="twitter"
+        className="login-img"
+      />
       <h2>Logga in på Twitter</h2>
 
       <form onSubmit={submitHandler}>
@@ -94,7 +100,9 @@ const Login = () => {
           <input type="submit" value="Login"></input>
         )}
       </form>
-      <p>Har du inget konto? <Link to="/signup">Sign up</Link></p>
+      <p>
+        Har du inget konto? <Link to="/signup">Sign up</Link>
+      </p>
     </div>
   );
 };
