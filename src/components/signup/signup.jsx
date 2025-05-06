@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./signup.css";
 
 const Signup = () => {
@@ -28,6 +29,7 @@ const Signup = () => {
 
   return (
     <div className="signup-container">
+      <img src="https://www.omnicoreagency.com/wp-content/uploads/2015/10/Twitter-Logo.png.webp" alt="twitter" className="login-img" />
       <h2>Registrera dig</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -56,6 +58,8 @@ const Signup = () => {
         />
         <button type="submit">Skapa konto</button>
       </form>
+      <br/>
+      <Link to="/.">Gå tillbaka</Link>
     </div>
   );
 };
