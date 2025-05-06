@@ -53,6 +53,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      <img src="https://www.omnicoreagency.com/wp-content/uploads/2015/10/Twitter-Logo.png.webp" alt="twitter" className="login-img" />
       <h2>Logga in på Twitter</h2>
 
       <form onSubmit={submitHandler}>
@@ -93,7 +94,7 @@ const Login = () => {
           <input type="submit" value="Login"></input>
         )}
       </form>
-      <Link to="/signup">Sign up</Link>
+      <p>Har du inget konto? <Link to="/signup">Sign up</Link></p>
     </div>
   );
 };
