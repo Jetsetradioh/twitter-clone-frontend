@@ -6,6 +6,7 @@ import Login from "./components/login/login";
 import Home from "./components/home/home";
 import Feed from "./components/feed/feed";
 import "./App.css";
+import Profile from "./components/profile/profile";
 
 function HomeLayout() {
   return (
@@ -15,7 +16,8 @@ function HomeLayout() {
       </div>
 
       <div className="feed">
-        <Feed />
+        <Profile />
+        <Feed></Feed>
       </div>
 
       <div className="sidebar">
@@ -32,6 +34,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/home" element={<HomeLayout />} />
+        <Route path="/profile" element={<Profile />}></Route>
       </Routes>
     </Router>
   );

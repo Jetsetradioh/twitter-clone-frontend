@@ -1,0 +1,78 @@
+.profile-container {
+  justify-self: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 30px;
+  margin-top: 20px;
+}
+.profile-header {
+  display: grid;
+  grid-template-columns: 8% auto;
+  align-items: center;
+  height: 70px;
+}
+#profile-left-icon {
+  justify-self: center;
+}
+.profile-header-box {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+}
+
+.profile-header h2,
+i,
+h6 {
+  padding: 0;
+  margin: 0;
+}
+.profile-banner {
+  background-color: bisque;
+  height: 200px;
+  border-top: 2px solid #333;
+  border-bottom: 2px solid #333;
+}
+.profile-image-box {
+  display: flex;
+  justify-content: space-between;
+  height: 70px;
+}
+.profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 200%;
+  margin-top: -80px;
+  margin-left: 15px;
+  border: solid 3px #333;
+  background-color: blue;
+}
+.profile-follow-btn {
+  height: 40px;
+  width: 100px;
+  margin: 15px;
+  align-self: center;
+  border-radius: 20px;
+  border: none;
+  background-color: white;
+}
+.profile-follow-btn:hover {
+  background-color: rgb(236, 230, 230);
+}
+.profile-name-box {
+  padding-top: 2%;
+}
+.profile-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  margin-left: 10px;
+}
+.profile-body h2,
+span,
+p,
+h6 {
+  margin: 0;
+  padding: 0;
+}

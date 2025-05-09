@@ -11,7 +11,7 @@
 }
 
 /*twitter logo*/
-.login-img{
+.login-img {
   height: 100px;
   width: auto;
 }
@@ -41,6 +41,15 @@
   border-radius: 8px;
   outline: none;
   transition: border-color 0.2s ease;
+}
+.login-username {
+  padding: 1rem;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  background-color: rgb(165, 164, 164);
+  color: rgb(226, 226, 226);
 }
 
 .login-container input:focus {

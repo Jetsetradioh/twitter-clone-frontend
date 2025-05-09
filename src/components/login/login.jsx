@@ -74,17 +74,20 @@ const Login = () => {
             onChange={({ target }) => setUser({ ...user, name: target.value })}
           />
         ) : (
-          <input
-            type="password"
-            style={{
-              border: error ? "2px solid red" : "1px solid #ccc",
-            }}
-            placeholder="Password"
-            value={user.password}
-            onChange={({ target }) =>
-              setUser({ ...user, password: target.value })
-            }
-          />
+          <>
+            <div className="login-username">{user.name}</div>
+            <input
+              type="password"
+              style={{
+                border: error ? "2px solid red" : "1px solid #ccc",
+              }}
+              placeholder="Password"
+              value={user.password}
+              onChange={({ target }) =>
+                setUser({ ...user, password: target.value })
+              }
+            />
+          </>
         )}
         {error ? (
           <span style={{ color: "red" }}>Wrong username or password!</span>
