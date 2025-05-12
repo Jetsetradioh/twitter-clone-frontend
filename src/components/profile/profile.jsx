@@ -16,6 +16,12 @@ const Profile = () => {
     isVerified: false, // Om kontot är verifierat eller inte
   };
 
+  const getProfile = async () => {
+    const respone = await fetch(`http://localhost:3000/api/profile/${user.id}`);
+    const data = await respone.json();
+    let profile = data;
+  };
+
   const {
     name,
     username,
