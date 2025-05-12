@@ -1,6 +1,7 @@
+import { useState } from "react";
 import "./profile.css";
 const Profile = () => {
-  const profile = {
+  const profile1 = {
     username: "filipliljenberg", // Användarnamn på Twitter
     name: "Filip Liljenberg", // Fullständigt namn
     bio: "Frontend developer | Passion for web design & coding | Always learning", // Profilbio
@@ -15,11 +16,11 @@ const Profile = () => {
     website: "https://filipliljenberg.dev", // Länk till personlig webbsida
     isVerified: false, // Om kontot är verifierat eller inte
   };
+  const { profile, setProfile } = useState();
 
   const getProfile = async () => {
     const respone = await fetch(`http://localhost:3000/api/profile/${user.id}`);
     const data = await respone.json();
-    let profile = data;
   };
 
   const {
