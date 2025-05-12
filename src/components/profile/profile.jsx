@@ -1,28 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./profile.css";
-const Profile = () => {
-  const profile1 = {
-    username: "filipliljenberg", // Användarnamn på Twitter
-    name: "Filip Liljenberg", // Fullständigt namn
-    bio: "Frontend developer | Passion for web design & coding | Always learning", // Profilbio
-    profileImage: "https://pbs.twimg.com/media/FjU2lkcWYAgNG6d.jpg", // URL till profilbild
-    bannerImage:
-      "https://marketplace.canva.com/EAE91Kz0wsI/1/0/1600w/canva-blue-yellow-retro-quotes-twitter-header-xTB_BZnqeew.jpg", // URL till bannerbild
-    followersCount: 1200, // Antal följare
-    followingCount: 350, // Antal följda konton
-    tweetsCount: 500, // Antal tweets
-    joinedDate: "2019-08-12", // Datum när användaren började använda Twitter
-    location: "Stockholm, Sweden", // Användarens plats
-    website: "https://filipliljenberg.dev", // Länk till personlig webbsida
-    isVerified: false, // Om kontot är verifierat eller inte
-  };
-  const { profile, setProfile } = useState();
-
-  const getProfile = async () => {
-    const respone = await fetch(`http://localhost:3000/api/profile/${user.id}`);
-    const data = await respone.json();
-  };
-
+const Profile = ({ loggedUser }) => {
   const {
     name,
     username,
@@ -34,7 +12,7 @@ const Profile = () => {
     joinedDate,
     followersCount,
     followingCount,
-  } = profile;
+  } = loggedUser;
 
   return (
     <div className="profile-container">

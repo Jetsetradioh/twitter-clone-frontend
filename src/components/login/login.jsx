@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
 
-const Login = () => {
-  const [user, setUser] = useState({ name: "", password: "", loggedIn: false });
+const Login = ({ setUser, user, setLoggedUser }) => {
   const [toggle, setToggle] = useState(true);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
@@ -38,9 +37,12 @@ const Login = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
       });
-      if (resp.ok) {
-        setError(false);
 
+      if (resp.ok) {
+        const data = await resp.json();
+        setLoggedUser(data);
+
+        setError(false);
         navigate("/home");
       }
       if (!resp.ok) {
