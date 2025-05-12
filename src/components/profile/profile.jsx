@@ -52,7 +52,7 @@ const Profile = () => {
         <p>{bio}</p>
         <h6>{location}</h6>
         <h6>Joined {joinedDate}</h6>
-        <div>
+        <div className="profile-following">
           <span>{followingCount} Following </span>
           <span>{followersCount} Followers</span>
         </div>
