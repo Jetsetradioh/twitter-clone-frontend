@@ -49,10 +49,12 @@ const Navbar = () => {
           alt="profile"
           className="navbar-profile-img"
         />
-        <div className="navbar-profile-info">
-          <span className="navbar-profile-name">Mackan_131</span>
-          <span className="navbar-profile-username">@131Mackan</span>
-        </div>
+        <Link to="/profile" className="nav-profile-dots">
+          <div className="navbar-profile-info">
+            <span className="navbar-profile-name">Mackan_131</span>
+            <span className="navbar-profile-username">@131Mackan</span>
+          </div>
+        </Link>
         <span
           className="navbar-profile-dots"
           onClick={() => setShowLogout(!showLogout)}
@@ -60,7 +62,10 @@ const Navbar = () => {
           ⋯
         </span>
         {showLogout && (
-          <div className="logout-modal-overlay" onClick={() => setShowLogout(false)}>
+          <div
+            className="logout-modal-overlay"
+            onClick={() => setShowLogout(false)}
+          >
             <div className="logout-modal" onClick={(e) => e.stopPropagation()}>
               <img
                 src="https://www.omnicoreagency.com/wp-content/uploads/2015/10/Twitter-Logo.png.webp"
@@ -69,13 +74,20 @@ const Navbar = () => {
               />
               <h3 className="logout-title">Log out of Twitter?</h3>
               <div className="logout-buttons">
-                <Link to="/." className="logout-btn logout-confirm">Log out</Link>
-                <button onClick={() => setShowLogout(false)} className="logout-btn logout-cancel">Cancel</button>
+                <Link to="/." className="logout-btn logout-confirm">
+                  Log out
+                </Link>
+                <button
+                  onClick={() => setShowLogout(false)}
+                  className="logout-btn logout-cancel"
+                >
+                  Cancel
+                </button>
               </div>
             </div>
           </div>
         )}
-        </div>
+      </div>
     </div>
   );
 };

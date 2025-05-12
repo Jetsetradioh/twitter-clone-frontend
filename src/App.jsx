@@ -22,7 +22,6 @@ function HomeLayout({ loggedUser }) {
       </div>
 
       <div className="feed">
-        <Profile loggedUser={loggedUser} />
         <Feed></Feed>
       </div>
 
