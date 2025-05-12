@@ -28,7 +28,7 @@ h6 {
   margin: 0;
 }
 .profile-banner {
-  background-color: bisque;
+  background-color: grey;
   height: 200px;
   border-top: 2px solid #333;
   border-bottom: 2px solid #333;
@@ -61,6 +61,7 @@ h6 {
 }
 .profile-name-box {
   padding-top: 2%;
+  margin-bottom: 10px;
 }
 .profile-body {
   display: flex;
@@ -75,4 +76,9 @@ p,
 h6 {
   margin: 0;
   padding: 0;
+}
+.profile-following {
+  display: flex;
+  gap: 20px;
+  font-size: small;
 }
