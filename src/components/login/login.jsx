@@ -29,8 +29,7 @@ const Login = ({ setUser, user, setLoggedUser }) => {
     }
   };
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
+  const submitHandler = async () => {
     try {
       const resp = await fetch("http://localhost:3000/api/login", {
         method: "POST",
@@ -55,6 +54,52 @@ const Login = ({ setUser, user, setLoggedUser }) => {
     }
   };
 
+  const username = () => {
+    return (
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          clickHandler();
+        }}
+      >
+        <input
+          type="text"
+          style={{
+            border: error ? "2px solid red" : "1px solid #ccc",
+          }}
+          placeholder="Username"
+          value={user.name}
+          onChange={({ target }) => setUser({ ...user, name: target.value })}
+        />
+      </form>
+    );
+  };
+  const password = () => {
+    return (
+      <>
+        <div className="login-username">{user.name}</div>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            submitHandler();
+          }}
+        >
+          <input
+            type="password"
+            style={{
+              border: error ? "2px solid red" : "1px solid #ccc",
+            }}
+            placeholder="Password"
+            value={user.password}
+            onChange={({ target }) =>
+              setUser({ ...user, password: target.value })
+            }
+          />
+        </form>
+      </>
+    );
+  };
+
   return (
     <div className="login-container">
       <img
@@ -64,33 +109,8 @@ const Login = ({ setUser, user, setLoggedUser }) => {
       />
       <h2>Logga in på Twitter</h2>
 
-      <form onSubmit={submitHandler}>
-        {toggle ? (
-          <input
-            type="text"
-            style={{
-              border: error ? "2px solid red" : "1px solid #ccc",
-            }}
-            placeholder="Username"
-            value={user.name}
-            onChange={({ target }) => setUser({ ...user, name: target.value })}
-          />
-        ) : (
-          <>
-            <div className="login-username">{user.name}</div>
-            <input
-              type="password"
-              style={{
-                border: error ? "2px solid red" : "1px solid #ccc",
-              }}
-              placeholder="Password"
-              value={user.password}
-              onChange={({ target }) =>
-                setUser({ ...user, password: target.value })
-              }
-            />
-          </>
-        )}
+      <div>
+        {toggle ? username() : password()}
         {error ? (
           <span style={{ color: "red" }}>Wrong username or password!</span>
         ) : (
@@ -102,9 +122,11 @@ const Login = ({ setUser, user, setLoggedUser }) => {
             Nästa
           </button>
         ) : (
-          <input type="submit" value="Login"></input>
+          <button type="button" onClick={submitHandler}>
+            Logga in
+          </button>
         )}
-      </form>
+      </div>
       <p>
         Har du inget konto? <Link to="/signup">Sign up</Link>
       </p>
