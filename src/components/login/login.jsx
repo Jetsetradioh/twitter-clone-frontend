@@ -110,7 +110,7 @@ const Login = ({ setLoggedUser }) => {
         {error && (
           <span style={{ color: "red" }}>Wrong username or password!</span>
         )}
-        <button type="button" onClick={toggle ? clickHandler : submitHandler}>
+        <button className="login-button" type="button" onClick={toggle ? clickHandler : submitHandler}>
           {toggle ? "Nästa" : "Logga in"}
         </button>
       </div>
