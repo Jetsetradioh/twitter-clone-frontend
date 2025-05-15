@@ -40,6 +40,18 @@ const Feed = () => {
     },
   ];
 
+  const [tweet, setTweet] = useState("");
+
+  const submitTweet = async (e) => {
+    e.preventDefault();
+    console.log(tweet);
+    const response = await fetch("http://localhost:3000/api/tweet", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(tweet),
+    });
+  };
+
   return (
     <div className="feed">
       {/* Tabb för att växla mellan 'For you' och 'Following' */}
@@ -60,17 +72,26 @@ const Feed = () => {
 
       {/* Posta nytt inlägg */}
       <div className="post-box">
-        <textarea placeholder="What's happening?" rows="2" />
-        <div className="post-actions">
-          <div className="icon-row">
-            <button className="icon-button">🖼️</button>
-            <button className="icon-button">🎁</button>
-            <button className="icon-button">📊</button>
-            <button className="icon-button">😊</button>
-            <button className="icon-button">📅</button>
+        <form onSubmit={submitTweet}>
+          <textarea
+            placeholder="What's happening?"
+            rows="2"
+            value={tweet}
+            onChange={(e) => {
+              setTweet(e.target.value);
+            }}
+          />
+          <div className="post-actions">
+            <div className="icon-row">
+              <button className="icon-button">🖼️</button>
+              <button className="icon-button">🎁</button>
+              <button className="icon-button">📊</button>
+              <button className="icon-button">😊</button>
+              <button className="icon-button">📅</button>
+            </div>
+            <input type="submit" className="post-button" value="Post" />
           </div>
-          <button className="post-button">Post</button>
-        </div>
+        </form>
       </div>
 
       <div className="feed-show-posts">Show 85 posts</div>

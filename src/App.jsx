@@ -13,6 +13,7 @@ import Feed from "./components/feed/feed";
 import "./App.css";
 import Profile from "./components/profile/profile";
 import { useEffect, useState } from "react";
+import Tweet from "./components/tweet/tweet";
 
 function HomeLayout({ loggedUser }) {
   return (
@@ -25,9 +26,7 @@ function HomeLayout({ loggedUser }) {
         <Feed></Feed>
       </div>
 
-      <div className="sidebar">
-        <Sidebar />
-      </div>
+      <div className="sidebar">{/*<Sidebar />*/}</div>
     </div>
   );
 }
@@ -51,6 +50,7 @@ function App() {
         />
         <Route path="/signup" element={<Signup />} />
         <Route path="/home" element={<HomeLayout loggedUser={loggedUser} />} />
+
         <Route
           path="/profile"
           element={<Profile loggedUser={loggedUser} />}
