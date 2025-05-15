@@ -39,7 +39,7 @@ const Login = ({ setUser, user, setLoggedUser }) => {
 
       if (resp.ok) {
         const data = await resp.json();
-        setLoggedUser(data);
+        setLoggedUser(data.foundUser);
         setError(false);
         navigate("/home");
       }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./feed.css";
 
-const Feed = () => {
+const Feed = (loggedUser) => {
   // Håller reda på vilken tabb som är aktiv (For you eller Following)
   const [activeTab, setActiveTab] = useState("forYou");
 
@@ -40,12 +40,12 @@ const Feed = () => {
     },
   ];
 
-  const [tweet, setTweet] = useState("");
+  const [tweet, setTweet] = useState({ message: "" });
 
   const submitTweet = async (e) => {
     e.preventDefault();
-    console.log(tweet);
-    const response = await fetch("http://localhost:3000/api/tweet", {
+    const id = loggedUser.loggedUser._id;
+    const response = await fetch(`http://localhost:3000/api/tweet/${id}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(tweet),
@@ -76,11 +76,12 @@ const Feed = () => {
           <textarea
             placeholder="What's happening?"
             rows="2"
-            value={tweet}
+            value={tweet.message}
             onChange={(e) => {
-              setTweet(e.target.value);
+              setTweet({ message: e.target.value });
             }}
           />
+
           <div className="post-actions">
             <div className="icon-row">
               <button className="icon-button">🖼️</button>

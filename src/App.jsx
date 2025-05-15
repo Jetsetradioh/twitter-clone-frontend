@@ -23,7 +23,7 @@ function HomeLayout({ loggedUser }) {
       </div>
 
       <div className="feed">
-        <Feed></Feed>
+        <Feed loggedUser={loggedUser}></Feed>
       </div>
 
       <div className="sidebar">{/*<Sidebar />*/}</div>
