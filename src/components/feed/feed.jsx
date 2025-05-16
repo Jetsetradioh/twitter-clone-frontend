@@ -5,7 +5,6 @@ const Feed = ({ loggedUser }) => {
   // Håller reda på vilken tabb som är aktiv (For you eller Following)
   const [activeTab, setActiveTab] = useState("forYou");
 
-  // Hårdkodade inlägg som visas i flödet
   const posts = [
     {
       username: "Existenz.se",
@@ -23,6 +22,7 @@ const Feed = ({ loggedUser }) => {
 
   const submitTweet = async (e) => {
     e.preventDefault();
+    console.log(tweet);
     const id = loggedUser.foundUser._id;
     const response = await fetch(`http://localhost:3000/api/tweet/${id}`, {
       method: "POST",
