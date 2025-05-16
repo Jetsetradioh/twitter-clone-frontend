@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./feed.css";
 
-const Feed = (loggedUser) => {
+const Feed = ({ loggedUser }) => {
   // Håller reda på vilken tabb som är aktiv (For you eller Following)
   const [activeTab, setActiveTab] = useState("forYou");
 
@@ -17,38 +17,17 @@ const Feed = (loggedUser) => {
       likes: "5.1K",
       views: "20.3K",
     },
-    {
-      username: "Karin Andersson",
-      handle: "@karin_dev",
-      time: "3h",
-      content:
-        "Idag lärde jag mig hur man skapar en REST API med Express och MongoDB 🙌",
-      comments: 4,
-      retweets: 12,
-      likes: 150,
-      views: "8.2K",
-    },
-    {
-      username: "Arch Linux News",
-      handle: "@arch_news",
-      time: "6h",
-      content: "Kernel 6.14.5-arch1-1 is now available in the repos. 🎉",
-      comments: 2,
-      retweets: 30,
-      likes: 380,
-      views: "12.6K",
-    },
   ];
 
   const [tweet, setTweet] = useState({ message: "" });
 
   const submitTweet = async (e) => {
     e.preventDefault();
-    const id = loggedUser.loggedUser._id;
+    const id = loggedUser.foundUser._id;
     const response = await fetch(`http://localhost:3000/api/tweet/${id}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(tweet),
+      body: JSON.stringify([loggedUser.foundUser, tweet]),
     });
   };
 

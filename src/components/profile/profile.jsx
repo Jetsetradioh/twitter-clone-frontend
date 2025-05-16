@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./profile.css";
 import Tweet from "../tweet/tweet";
 const Profile = ({ loggedUser }) => {
+  const [tweets, setTweets] = useState([]);
   const {
     _id,
     name,
@@ -14,11 +15,16 @@ const Profile = ({ loggedUser }) => {
     joinedDate,
     followersCount,
     followingCount,
-  } = loggedUser;
+  } = loggedUser.foundUser;
 
-  useEffect(async () => {
-    const response = await fetch(`http://localhost:3000/api/tweets/${_id}`);
-    const data = await response.json();
+  useEffect(() => {
+    const getTweets = async () => {
+      const response = await fetch(`http://localhost:3000/api/tweets/${_id}`);
+      const data = await response.json();
+      setTweets(data);
+      console.log(data);
+    };
+    getTweets();
   }, []);
 
   return (
@@ -49,6 +55,7 @@ const Profile = ({ loggedUser }) => {
           <span>{followersCount} Followers</span>
         </div>
       </div>
+      <Tweet tweets={tweets}></Tweet>
     </div>
   );
 };

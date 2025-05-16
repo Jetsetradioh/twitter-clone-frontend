@@ -80,116 +80,115 @@
 }
 
 .navbar-profile {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.75rem 1rem;
-    border-radius: 9999px;
-    transition: background-color 0.2s ease;
-    cursor: pointer;
-    position: relative;
-    bottom: 20px;
-  }
-  
-  .navbar-profile:hover {
-    background-color: rgba(235, 235, 235, 0.337);
-  }
-  
-  .navbar-profile-img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  
-  .navbar-profile-info {
-    flex: 1;
-    margin-left: 0.75rem;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-  
-  .navbar-profile-name {
-    font-weight: 600;
-    font-size: 14px;
-    color: #fff;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  
-  .navbar-profile-username {
-    font-size: 13px;
-    color: #8899a6;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  
-  .navbar-profile-dots {
-    font-size: 20px;
-    color: #fff;
-    margin-left: auto;
-    padding: 0 0.5rem;
-  }
-  
-  .logout-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .logout-modal {
-    background-color: #242424;
-    border-radius: 16px;
-    padding: 2rem;
-    width: 300px;
-    text-align: center;
-    border: 1px solid #2f3336;
-  }
-  
-  .logout-logo {
-    height: 60px;
-    margin-bottom: 1rem;
-  }
-  
-  .logout-title {
-    color: #fff;
-    font-size: 20px;
-    margin-bottom: 1.5rem;
-  }
-  
-  .logout-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .logout-btn {
-    padding: 0.75rem;
-    border-radius: 9999px;
-    font-weight: bold;
-    font-size: 15px;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-  }
-  
-  .logout-confirm {
-    background-color: #fff;
-    color: #000;
-  }
-  
-  .logout-cancel {
-    background-color: transparent;
-    color: #fff;
-    border: 1px solid #536471;
-  }
-  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-radius: 9999px;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  position: relative;
+  bottom: 20px;
+}
+
+.navbar-profile:hover {
+  background-color: rgba(235, 235, 235, 0.337);
+}
+
+.navbar-profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.navbar-profile-info {
+  flex: 1;
+  margin-left: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.navbar-profile-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.navbar-profile-username {
+  font-size: 13px;
+  color: #8899a6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.navbar-profile-dots {
+  font-size: 20px;
+  color: #fff;
+  margin-left: auto;
+  padding: 0 0.5rem;
+}
+
+.logout-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.logout-modal {
+  background-color: #242424;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 300px;
+  text-align: center;
+  border: 1px solid #2f3336;
+}
+
+.logout-logo {
+  height: 60px;
+  margin-bottom: 1rem;
+}
+
+.logout-title {
+  color: #fff;
+  font-size: 20px;
+  margin-bottom: 1.5rem;
+}
+
+.logout-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.logout-btn {
+  padding: 0.75rem;
+  border-radius: 9999px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+}
+
+.logout-confirm {
+  background-color: #fff;
+  color: #000;
+}
+
+.logout-cancel {
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid #536471;
+}

@@ -46,12 +46,11 @@ function App() {
           path="/home"
           element={
             <HomeLayout>
-              <Feed />
+              <Feed loggedUser={loggedUser} />
             </HomeLayout>
           }
         />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/home" element={<HomeLayout loggedUser={loggedUser} />} />
 
         <Route
           path="/profile"
