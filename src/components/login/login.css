@@ -4,27 +4,28 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 70vh;
+  height: 60vh;
   background-color: #000000;
   font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   padding: 2rem;
 }
 
-/*twitter logo*/
+/* Twitter-logotyp */
 .login-img {
-  height: 100px;
+  height: 90px;
   width: auto;
+  margin-bottom: 2rem;
 }
 
 /* Rubrik */
 .login-container h2 {
-  font-size: 24px;
+  font-size: 31px;
   font-weight: 700;
   color: #ffffff;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-/* Formuläret */
+/* Formulär-stil */
 .login-container form {
   display: flex;
   flex-direction: column;
@@ -37,24 +38,23 @@
 .login-container input {
   padding: 1rem;
   font-size: 16px;
-  border: 1px solid #ccc;
+  border: 1px solid #2f3336;
   border-radius: 8px;
+  background-color: #16181c;
+  color: #e7e9ea;
   outline: none;
-  transition: border-color 0.2s ease;
-}
-.login-username {
-  padding: 1rem;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  outline: none;
-  background-color: rgb(165, 164, 164);
-  color: rgb(226, 226, 226);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.login-container input:focus {
-  border-color: #1d9bf0;
-  box-shadow: 0 0 0 2px rgba(29, 155, 240, 0.2);
+/* Visat användarnamn */
+.login-username {
+  font-size: 16px;
+  color: #e7e9ea;
+  background-color: #16181c;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
 /* Knapp */
@@ -69,19 +69,17 @@
   border-radius: 9999px;
   cursor: pointer;
   transition: background-color 0.2s ease;
-}
-
-.login-container button:hover,
-.login-container input[type="submit"]:hover {
-  background-color: #1a8cd8;
+  width: 100%;
+  max-width: 360px;
+  margin-top: 1rem;
 }
 
 /* Länk till signup */
 .login-container a {
-  margin-top: 1rem;
+  margin-top: 2rem;
   color: #1d9bf0;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .login-container a:hover {

@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./login.css";
 
-const Login = ({ setUser, user, setLoggedUser }) => {
+const Login = ({ setLoggedUser }) => {
   const [toggle, setToggle] = useState(true);
   const [error, setError] = useState(false);
+  const [user, setUser] = useState({ name: "", password: "" });
   const navigate = useNavigate();
 
   const clickHandler = async () => {
@@ -17,7 +17,7 @@ const Login = ({ setUser, user, setLoggedUser }) => {
       });
       if (response.ok) {
         setError(false);
-        setToggle((...prev) => !prev);
+        setToggle((prev) => !prev);
       } else {
         setUser({ name: "", password: "" });
         setError(true);
@@ -37,14 +37,14 @@ const Login = ({ setUser, user, setLoggedUser }) => {
         body: JSON.stringify(user),
       });
 
+      const data = await resp.json();
+
       if (resp.ok) {
-        const data = await resp.json();
-        setLoggedUser(data.foundUser);
+        setLoggedUser(data);
+        localStorage.setItem("loggedUser", JSON.stringify(data));
         setError(false);
         navigate("/home");
-      }
-      if (!resp.ok) {
-        const data = await resp.json();
+      } else {
         setError(true);
         console.log(data.message);
       }
@@ -53,51 +53,48 @@ const Login = ({ setUser, user, setLoggedUser }) => {
     }
   };
 
-  const username = () => {
-    return (
+  const username = () => (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        clickHandler();
+      }}
+    >
+      <input
+        type="text"
+        style={{
+          border: error ? "2px solid red" : "1px solid #ccc",
+        }}
+        placeholder="Username"
+        value={user.name}
+        onChange={({ target }) => setUser({ ...user, name: target.value })}
+      />
+    </form>
+  );
+
+  const password = () => (
+    <>
+      <div className="login-username">{user.name}</div>
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          clickHandler();
+          submitHandler();
         }}
       >
         <input
-          type="text"
+          type="password"
           style={{
             border: error ? "2px solid red" : "1px solid #ccc",
           }}
-          placeholder="Username"
-          value={user.name}
-          onChange={({ target }) => setUser({ ...user, name: target.value })}
+          placeholder="Password"
+          value={user.password}
+          onChange={({ target }) =>
+            setUser({ ...user, password: target.value })
+          }
         />
       </form>
-    );
-  };
-  const password = () => {
-    return (
-      <>
-        <div className="login-username">{user.name}</div>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            submitHandler();
-          }}
-        >
-          <input
-            type="password"
-            style={{
-              border: error ? "2px solid red" : "1px solid #ccc",
-            }}
-            placeholder="Password"
-            value={user.password}
-            onChange={({ target }) =>
-              setUser({ ...user, password: target.value })
-            }
-          />
-        </form>
-      </>
-    );
-  };
+    </>
+  );
 
   return (
     <div className="login-container">
@@ -110,21 +107,16 @@ const Login = ({ setUser, user, setLoggedUser }) => {
 
       <div>
         {toggle ? username() : password()}
-        {error ? (
+        {error && (
           <span style={{ color: "red" }}>Wrong username or password!</span>
-        ) : (
-          ""
         )}
-
-        {toggle ? (
-          <button type="button" onClick={clickHandler}>
-            Nästa
-          </button>
-        ) : (
-          <button type="button" onClick={submitHandler}>
-            Logga in
-          </button>
-        )}
+        <button
+          className="login-button"
+          type="button"
+          onClick={toggle ? clickHandler : submitHandler}
+        >
+          {toggle ? "Nästa" : "Logga in"}
+        </button>
       </div>
       <p>
         Har du inget konto? <Link to="/signup">Sign up</Link>

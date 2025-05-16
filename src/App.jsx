@@ -1,21 +1,15 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Signup from "./components/signup/signup";
 import Sidebar from "./components/sidebar/sidebar";
 import Navbar from "./components/navbar/navbar";
 import Login from "./components/login/login";
-import Home from "./components/home/home";
 import Feed from "./components/feed/feed";
-import "./App.css";
 import Profile from "./components/profile/profile";
 import { useEffect, useState } from "react";
 import Tweet from "./components/tweet/tweet";
+import "./App.css";
 
-function HomeLayout({ loggedUser }) {
+function HomeLayout({ children }) {
   return (
     <div className="app-layout">
       <div className="navbar">
@@ -23,7 +17,7 @@ function HomeLayout({ loggedUser }) {
       </div>
 
       <div className="feed">
-        <Feed loggedUser={loggedUser}></Feed>
+        {children} {/* Här visas Feed eller Profile beroende på route */}
       </div>
 
       <div className="sidebar">{/*<Sidebar />*/}</div>
@@ -32,20 +26,28 @@ function HomeLayout({ loggedUser }) {
 }
 
 function App() {
-  const [user, setUser] = useState({ name: "", password: "" });
-  const [loggedUser, setLoggedUser] = useState();
+  const [loggedUser, setLoggedUser] = useState(() => {
+    const storedUser = localStorage.getItem("loggedUser");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
+
+  useEffect(() => {
+    if (loggedUser) {
+      localStorage.setItem("loggedUser", JSON.stringify(loggedUser));
+    }
+  }, [loggedUser]);
 
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<Login setLoggedUser={setLoggedUser} />} />
+        <Route path="/signup" element={<Signup />} />
         <Route
-          path="/"
+          path="/home"
           element={
-            <Login
-              setUser={setUser}
-              user={user}
-              setLoggedUser={setLoggedUser}
-            />
+            <HomeLayout>
+              <Feed />
+            </HomeLayout>
           }
         />
         <Route path="/signup" element={<Signup />} />
@@ -53,8 +55,12 @@ function App() {
 
         <Route
           path="/profile"
-          element={<Profile loggedUser={loggedUser} />}
-        ></Route>
+          element={
+            <HomeLayout>
+              <Profile loggedUser={loggedUser} />
+            </HomeLayout>
+          }
+        />
       </Routes>
     </Router>
   );
