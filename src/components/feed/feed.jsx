@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./feed.css";
 
 const Feed = ({ loggedUser }) => {
   // Håller reda på vilken tabb som är aktiv (For you eller Following)
   const [activeTab, setActiveTab] = useState("forYou");
+
+  const [tweets, setTweets] = useState([]);
 
   // Hårdkodade inlägg som visas i flödet
   const posts = [
@@ -18,6 +20,21 @@ const Feed = ({ loggedUser }) => {
       views: "20.3K",
     },
   ];
+
+  useEffect(() => {
+    const getTweets = async () => {
+      try {
+        console.log("test");
+        const response = await fetch(
+          `http://localhost:3000/api/tweet/${activeTab}`
+        );
+        const data = await response.json();
+        console.log(data);
+        setTweets(data);
+      } catch {}
+    };
+    getTweets();
+  }, []);
 
   const [tweet, setTweet] = useState({ message: "" });
 
@@ -77,12 +94,12 @@ const Feed = ({ loggedUser }) => {
       <div className="feed-show-posts">Show 85 posts</div>
 
       <div className="feed-posts">
-        {posts.map((post, index) => (
+        {tweets.map((post, index) => (
           <div className="post" key={index}>
             <div className="post-header">
               <strong>{post.username}</strong>{" "}
               <span className="handle-time">
-                {post.handle} · {post.time}
+                {post.handle} {post.time}
               </span>
             </div>
             <p className="post-content">{post.content}</p>
