@@ -1,19 +1,23 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import "./navbar.css";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./navbar.css"
 
 const Navbar = () => {
   const [activeItem, setActiveItem] = useState("Home");
   const [showLogout, setShowLogout] = useState(false);
 
+  //  Get the logged-in user from localStorage
+  const storedUser = JSON.parse(localStorage.getItem("loggedUser"));
+  const loggedUser = storedUser?.foundUser;
+
   const menu = [
-    { name: "Home", icon: "🏠" },
+    { name: "Home", icon: "🏠", path: "/home" },
     { name: "Explore", icon: "🔍" },
     { name: "Notifications", icon: "🔔" },
     { name: "Messages", icon: "✉️" },
     { name: "Bookmarks", icon: "🔖" },
     { name: "Lists", icon: "📋" },
-    { name: "Profile", icon: "👤" },
+    { name: "Profile", icon: "👤", path: "/profile" },
     { name: "More", icon: "⋯" },
   ];
 
@@ -29,30 +33,40 @@ const Navbar = () => {
         </div>
         <nav className="navbar-menu">
           {menu.map((item) => (
-            <button
-              key={item.name}
-              className={`navbar-item ${
-                activeItem === item.name ? "active" : ""
-              }`}
-              onClick={() => setActiveItem(item.name)}
-            >
-              <span className="navbar-icon">{item.icon}</span>
-              <span>{item.name}</span>
-            </button>
+            item.path ? (
+              <Link
+                to={item.path}
+                key={item.name}
+                className={`navbar-item ${activeItem === item.name ? "active" : ""}`}
+                onClick={() => setActiveItem(item.name)}
+              >
+                <span className="navbar-icon">{item.icon}</span>
+                <span>{item.name}</span>
+              </Link>
+            ) : (
+              <button
+                key={item.name}
+                className={`navbar-item ${activeItem === item.name ? "active" : ""}`}
+                onClick={() => setActiveItem(item.name)}
+              >
+                <span className="navbar-icon">{item.icon}</span>
+                <span>{item.name}</span>
+              </button>
+            )
           ))}
         </nav>
         <button className="post-button">Post</button>
       </div>
       <div className="navbar-profile">
         <img
-          src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Image.png"
+          src={loggedUser?.profileImage || "https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Image.png"}
           alt="profile"
           className="navbar-profile-img"
         />
         <Link to="/profile" className="nav-profile-dots">
           <div className="navbar-profile-info">
-            <span className="navbar-profile-name">Mackan_131</span>
-            <span className="navbar-profile-username">@131Mackan</span>
+            <span className="navbar-profile-name">{loggedUser?.name || "Guest"}</span>
+            <span className="navbar-profile-username">@{loggedUser?.username || "guest"}</span>
           </div>
         </Link>
         <span
