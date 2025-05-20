@@ -100,7 +100,7 @@ const Signup = () => {
         />
         <button type="submit">Skapa konto</button>
       </form>
-
+      <br/>
       <p>
         Redan registrerad? <Link to="/">Logga in här</Link>
       </p>

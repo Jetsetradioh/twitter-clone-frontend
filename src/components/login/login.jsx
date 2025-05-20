@@ -36,6 +36,7 @@ const Login = ({ setLoggedUser }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
       });
+      console.log(user);
 
       const data = await resp.json();
 
@@ -105,11 +106,11 @@ const Login = ({ setLoggedUser }) => {
       />
       <h2>Logga in på Twitter</h2>
 
-      <div>
+      <div className="login-form-wrapper">
         {toggle ? username() : password()}
-        {error && (
-          <span style={{ color: "red" }}>Wrong username or password!</span>
-        )}
+        <div className="login-error-message">
+          {error && <span>Wrong username or password!</span>}
+        </div>
         <button
           className="login-button"
           type="button"
@@ -118,6 +119,8 @@ const Login = ({ setLoggedUser }) => {
           {toggle ? "Nästa" : "Logga in"}
         </button>
       </div>
+
+      <br/>
       <p>
         Har du inget konto? <Link to="/signup">Sign up</Link>
       </p>

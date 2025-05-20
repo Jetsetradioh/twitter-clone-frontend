@@ -1,3 +1,11 @@
+/* --- SIDEBAR försvinner om man har öppen konsol --- */
+@media (max-width: 1024px) {
+  .sidebar-wrapper {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
 /* --- SIDEBAR WRAPPER --- */
 .sidebar-wrapper {
   position: fixed;

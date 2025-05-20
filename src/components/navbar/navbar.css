@@ -183,12 +183,20 @@
 }
 
 .logout-confirm {
-  background-color: #fff;
-  color: #000;
-}
-
-.logout-cancel {
   background-color: transparent;
   color: #fff;
   border: 1px solid #536471;
+}
+
+.logout-cancel {
+  background-color: #fff;
+  color: #000000;
+  border: 1px solid #536471;
+}
+
+/* === remove lines under links ===*/
+.navbar-menu a,
+.navbar-profile a {
+  text-decoration: none;
+  color: inherit; 
 }

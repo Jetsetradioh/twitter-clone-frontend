@@ -20,7 +20,9 @@ function HomeLayout({ children, loggedUser }) {
         {children} {/* Här visas Feed eller Profile beroende på route */}
       </div>
 
-      <div className="sidebar">{/*<Sidebar />*/}</div>
+      <div className="sidebar">{/*<Sidebar />*/}
+        <Sidebar/>
+      </div>
     </div>
   );
 }
