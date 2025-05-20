@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 
-const Navbar = () => {
+const Navbar = ({ loggedUser }) => {
   const [activeItem, setActiveItem] = useState("Home");
   const [showLogout, setShowLogout] = useState(false);
-
   const menu = [
     { name: "Home", icon: "🏠" },
     { name: "Explore", icon: "🔍" },
@@ -51,8 +50,12 @@ const Navbar = () => {
         />
         <Link to="/profile" className="nav-profile-dots">
           <div className="navbar-profile-info">
-            <span className="navbar-profile-name">Mackan_131</span>
-            <span className="navbar-profile-username">@131Mackan</span>
+            <span className="navbar-profile-name">
+              {loggedUser.foundUser.name}
+            </span>
+            <span className="navbar-profile-username">
+              @{loggedUser.foundUser.username}
+            </span>
           </div>
         </Link>
         <span

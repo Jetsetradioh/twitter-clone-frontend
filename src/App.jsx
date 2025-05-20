@@ -9,11 +9,11 @@ import { useEffect, useState } from "react";
 import Tweet from "./components/tweet/tweet";
 import "./App.css";
 
-function HomeLayout({ children }) {
+function HomeLayout({ children, loggedUser }) {
   return (
     <div className="app-layout">
       <div className="navbar">
-        <Navbar />
+        <Navbar loggedUser={loggedUser} />
       </div>
 
       <div className="feed">
@@ -45,7 +45,7 @@ function App() {
         <Route
           path="/home"
           element={
-            <HomeLayout>
+            <HomeLayout loggedUser={loggedUser}>
               <Feed loggedUser={loggedUser} />
             </HomeLayout>
           }
@@ -55,7 +55,7 @@ function App() {
         <Route
           path="/profile"
           element={
-            <HomeLayout>
+            <HomeLayout loggedUser={loggedUser}>
               <Profile loggedUser={loggedUser} />
             </HomeLayout>
           }

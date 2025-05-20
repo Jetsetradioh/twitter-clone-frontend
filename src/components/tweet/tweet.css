@@ -1,0 +1,54 @@
+.feed-posts {
+  margin: 0;
+  padding: 0;
+}
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.tweet-image-box {
+  width: 15%;
+}
+.tweet-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+}
+.tweet-name {
+  font-weight: bold;
+  font-size: large;
+}
+.tweet {
+  display: grid;
+  grid-template-columns: 20% 70%;
+  padding: 0.75rem 1rem;
+  border-top: 1.5px solid #222;
+  margin: 0;
+  display: flex;
+}
+.tweet-content {
+  width: 100%;
+}
+
+.post:first-child {
+  border-top: none;
+}
+
+/* Feed Layout */
+.feed {
+  flex: 1;
+  max-width: 600px;
+  margin: 0 auto;
+  border-left: 1.5px solid #222;
+  border-right: 1.5px solid #222;
+  background-color: #000;
+  min-height: 100vh;
+}
+
+.tweet-actions {
+  display: flex;
+  align-items: center;
+  margin-top: 0.75rem;
+  gap: 1rem;
+}
