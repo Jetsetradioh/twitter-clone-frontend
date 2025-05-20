@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./feed.css";
 
-const Feed = ({ loggedUser }) => {
+const Feed = () => {
+  const storedUser = JSON.parse(localStorage.getItem("loggedUser"));
+  const loggedUser = storedUser?.foundUser;
+
   // Håller reda på vilken tabb som är aktiv (For you eller Following)
   const [activeTab, setActiveTab] = useState("forYou");
 
@@ -11,10 +14,9 @@ const Feed = ({ loggedUser }) => {
     const getTweets = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/tweet/${activeTab}/${loggedUser.foundUser._id}`
+          `http://localhost:3000/api/tweet/${activeTab}/${loggedUser?._id}`
         );
         const data = await response.json();
-        console.log(data);
         setTweets(data);
       } catch {}
     };
@@ -25,12 +27,11 @@ const Feed = ({ loggedUser }) => {
 
   const submitTweet = async (e) => {
     e.preventDefault();
-    console.log(tweet);
-    const id = loggedUser.foundUser._id;
+    const id = loggedUser?._id;
     const response = await fetch(`http://localhost:3000/api/tweet/${id}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify([loggedUser.foundUser, tweet]),
+      body: JSON.stringify([loggedUser, tweet]),
     });
   };
 

@@ -9,19 +9,19 @@ import { useEffect, useState } from "react";
 import Tweet from "./components/tweet/tweet";
 import "./App.css";
 
-function HomeLayout({ children, loggedUser }) {
+function HomeLayout({ children }) {
   return (
     <div className="app-layout">
       <div className="navbar">
-        <Navbar loggedUser={loggedUser} />
+        <Navbar />
       </div>
 
       <div className="feed">
         {children} {/* Här visas Feed eller Profile beroende på route */}
       </div>
 
-      <div className="sidebar">{/*<Sidebar />*/}
-        <Sidebar/>
+      <div className="sidebar">
+        <Sidebar />
       </div>
     </div>
   );
@@ -47,8 +47,8 @@ function App() {
         <Route
           path="/home"
           element={
-            <HomeLayout loggedUser={loggedUser}>
-              <Feed loggedUser={loggedUser} />
+            <HomeLayout>
+              <Feed />
             </HomeLayout>
           }
         />
@@ -57,8 +57,8 @@ function App() {
         <Route
           path="/profile"
           element={
-            <HomeLayout loggedUser={loggedUser}>
-              <Profile loggedUser={loggedUser} />
+            <HomeLayout>
+              <Profile />
             </HomeLayout>
           }
         />

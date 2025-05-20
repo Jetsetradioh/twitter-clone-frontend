@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./navbar.css";
 
-const Navbar = ({ loggedUser }) => {
+const Navbar = () => {
   const [activeItem, setActiveItem] = useState("Home");
   const [showLogout, setShowLogout] = useState(false);
 
