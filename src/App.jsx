@@ -5,6 +5,7 @@ import Navbar from "./components/navbar/navbar";
 import Login from "./components/login/login";
 import Feed from "./components/feed/feed";
 import Profile from "./components/profile/profile";
+import UserProfile from "./components/profile/userProfile";
 import { useEffect, useState } from "react";
 import Tweet from "./components/tweet/tweet";
 import "./App.css";
@@ -59,6 +60,14 @@ function App() {
           element={
             <HomeLayout>
               <Profile />
+            </HomeLayout>
+          }
+        />
+        <Route
+          path="/userProfile"
+          element={
+            <HomeLayout>
+              <UserProfile />
             </HomeLayout>
           }
         />

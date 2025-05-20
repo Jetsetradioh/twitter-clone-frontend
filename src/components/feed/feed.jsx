@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./feed.css";
+import { Link } from "react-router-dom";
 
 const Feed = () => {
   const storedUser = JSON.parse(localStorage.getItem("loggedUser"));
@@ -83,9 +84,12 @@ const Feed = () => {
       <div className="feed-posts">
         {tweets.map((tweet, index) => (
           <div className="tweet" key={index}>
-            <div className="tweet-image-box">
-              <img src={tweet.image} className="tweet-image"></img>
-            </div>
+            <Link to="/userProfile" state={{ tweet }}>
+              <div className="tweet-image-box">
+                <img src={tweet.image} className="tweet-image"></img>
+              </div>
+            </Link>
+
             <div className="tweet-content">
               <div className="post-header">
                 <span className="tweet-name">{tweet.name}</span>{" "}

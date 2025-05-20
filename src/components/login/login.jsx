@@ -36,7 +36,6 @@ const Login = ({ setLoggedUser }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
       });
-      console.log(user);
 
       const data = await resp.json();
 
@@ -120,7 +119,7 @@ const Login = ({ setLoggedUser }) => {
         </button>
       </div>
 
-      <br/>
+      <br />
       <p>
         Har du inget konto? <Link to="/signup">Sign up</Link>
       </p>
