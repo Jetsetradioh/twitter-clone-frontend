@@ -51,7 +51,7 @@ const Profile = () => {
 
         <p>{bio}</p>
         <h6>{location}</h6>
-        <h6>Joined {joinedDate}</h6>
+        <h6>Gick med {new Date(joinedDate).toLocaleDateString()}</h6>
         <div className="profile-following">
           <span>{followingCount} Following </span>
           <span>{followersCount} Followers</span>

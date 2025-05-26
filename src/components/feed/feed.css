@@ -19,7 +19,10 @@
   background-color: rgba(0, 0, 0, 0.65);
   z-index: 10;
 }
-
+/*some distance between the image and name*/
+.tweet-image{
+  margin-right: 10px;
+}
 /* Tabs */
 .tab {
   background: none;
