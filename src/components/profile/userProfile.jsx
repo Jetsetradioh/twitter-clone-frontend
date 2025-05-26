@@ -14,80 +14,82 @@ const UserProfile = () => {
   const [usersTweets, setUsersTweets] = useState();
 
   useEffect(() => {
-  const getProfile = async () => {
-    try {
-      const response = await fetch(`http://localhost:3000/api/user/${tweet.userId}`);
-      const data = await response.json();
-      setUser(data.user);
-      setUsersTweets(data.tweets);
+    const getProfile = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/user/${tweet.userId}`
+        );
+        const data = await response.json();
+        setUser(data.user);
+        setUsersTweets(data.tweets);
 
-      // Kolla om loggedUser följer denna användare
-      if (loggedUser && data.user.friends?.includes(loggedUser._id)) {
-        setIsFollowing(true);
-      } else {
-        setIsFollowing(false);
+        // Kolla om loggedUser följer denna användare
+        if (loggedUser && data.user.friends?.includes(loggedUser._id)) {
+          setIsFollowing(true);
+        } else {
+          setIsFollowing(false);
+        }
+      } catch (error) {
+        console.error("Fel vid hämtning av profil:", error);
       }
-    } catch (error) {
-      console.error("Fel vid hämtning av profil:", error);
-    }
-  };
+    };
 
-  getProfile();
-}, [loggedUser, tweet.userId]);
+    getProfile();
+  }, [loggedUser, tweet.userId]);
 
   const handleFollowToggle = async () => {
-  if (!loggedUser) {
-    alert("Du måste vara inloggad för att följa användare.");
-    return;
-  }
-
-  const url = isFollowing
-    ? `http://localhost:3000/api/remove-friend/${user._id}`
-    : `http://localhost:3000/api/add-friend/${user._id}`;
-
-  const method = isFollowing ? "DELETE" : "POST";
-
-  try {
-    const response = await fetch(url, {
-      method,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: loggedUser._id }),
-    });
-
-    if (response.ok) {
-      setIsFollowing(!isFollowing);
-
-      // Uppdatera profil-användaren (visad användare)
-      setUser((prevUser) => ({
-        ...prevUser,
-        followersCount: isFollowing
-          ? Math.max(0, prevUser.followersCount - 1)
-          : prevUser.followersCount + 1,
-      }));
-
-      // 👇 Hämta ny data för loggedUser
-      const updatedUserRes = await fetch(
-        `http://localhost:3000/api/user/${loggedUser._id}`
-      );
-      const updatedUserData = await updatedUserRes.json();
-
-      // 👇 Uppdatera localStorage
-      localStorage.setItem(
-        "loggedUser",
-        JSON.stringify({ foundUser: updatedUserData.user })
-      );
-
-      // 👇 Om du har setLoggedUser i denna komponent:
-      // setLoggedUser(updatedUserData.user);
-    } else {
-      const result = await response.json();
-      alert(result.message || "Något gick fel.");
+    if (!loggedUser) {
+      alert("Du måste vara inloggad för att följa användare.");
+      return;
     }
-  } catch (error) {
-    console.error("Fel vid följande:", error);
-    alert("Serverfel vid följande.");
-  }
-};
+
+    const url = isFollowing
+      ? `http://localhost:3000/api/remove-friend/${user._id}`
+      : `http://localhost:3000/api/add-friend/${user._id}`;
+
+    const method = isFollowing ? "DELETE" : "POST";
+
+    try {
+      const response = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: loggedUser._id }),
+      });
+
+      if (response.ok) {
+        setIsFollowing(!isFollowing);
+
+        // Uppdatera profil-användaren (visad användare)
+        setUser((prevUser) => ({
+          ...prevUser,
+          followersCount: isFollowing
+            ? Math.max(0, prevUser.followersCount - 1)
+            : prevUser.followersCount + 1,
+        }));
+
+        // 👇 Hämta ny data för loggedUser
+        const updatedUserRes = await fetch(
+          `http://localhost:3000/api/user/${loggedUser._id}`
+        );
+        const updatedUserData = await updatedUserRes.json();
+
+        // 👇 Uppdatera localStorage
+        localStorage.setItem(
+          "loggedUser",
+          JSON.stringify({ foundUser: updatedUserData.user })
+        );
+
+        // 👇 Om du har setLoggedUser i denna komponent:
+        // setLoggedUser(updatedUserData.user);
+      } else {
+        const result = await response.json();
+        alert(result.message || "Något gick fel.");
+      }
+    } catch (error) {
+      console.error("Fel vid följande:", error);
+      alert("Serverfel vid följande.");
+    }
+  };
 
   if (!user) {
     return <div>Laddar profil...</div>;
@@ -121,7 +123,6 @@ const UserProfile = () => {
         <button className="profile-follow-btn" onClick={handleFollowToggle}>
           {isFollowing ? "Unfollow" : "Follow"}
         </button>
-
       </div>
       <div className="profile-body">
         <div className="profile-name-box">
@@ -137,7 +138,7 @@ const UserProfile = () => {
           <span>{followersCount} Followers</span>
         </div>
       </div>
-      <Tweet tweets={usersTweets}></Tweet>
+      <Tweet tweets={usersTweets} showInput={false}></Tweet>
     </div>
   );
 };
