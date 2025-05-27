@@ -99,9 +99,15 @@ const Navbar = () => {
               />
               <h3 className="logout-title">Log out of Twitter?</h3>
               <div className="logout-buttons">
-                <Link to="/." className="logout-btn logout-confirm">
+                <button
+                  className="logout-btn logout-confirm"
+                  onClick={() => {
+                    localStorage.removeItem("loggedUser");
+                    window.location.href = "/";
+                  }}
+                >
                   Log out
-                </Link>
+                </button>
                 <button
                   onClick={() => setShowLogout(false)}
                   className="logout-btn logout-cancel"
