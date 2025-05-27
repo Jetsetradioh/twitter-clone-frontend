@@ -53,7 +53,6 @@ function App() {
             </HomeLayout>
           }
         />
-        <Route path="/signup" element={<Signup />} />
 
         <Route
           path="/profile"
