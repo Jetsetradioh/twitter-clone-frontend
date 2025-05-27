@@ -27,7 +27,7 @@ const Profile = () => {
       setTweets(data);
     };
     getTweets();
-  }, []);
+  }, [_id]);
 
   return (
     <div className="profile-container">
@@ -57,7 +57,7 @@ const Profile = () => {
           <span>{followersCount} Followers</span>
         </div>
       </div>
-      <Tweet tweets={tweets}></Tweet>
+      <Tweet tweets={tweets} showInput={false} />
     </div>
   );
 };
