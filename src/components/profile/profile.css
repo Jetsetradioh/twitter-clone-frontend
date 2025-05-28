@@ -82,3 +82,12 @@ h6 {
   gap: 20px;
   font-size: small;
 }
+.back-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  font-size: 20px;
+  color: #8b8b8b;
+  text-decoration: none;
+}

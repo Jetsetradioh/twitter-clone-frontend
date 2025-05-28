@@ -84,19 +84,21 @@ const Feed = () => {
       <div className="feed-posts">
         {tweets.map((tweet, index) => (
           <div className="tweet" key={index}>
-            <Link to="/userProfile" state={{ tweet }}>
+            <Link to="/userProfile" state={{ tweet }} className="link-user">
               <div className="tweet-image-box">
                 <img src={tweet.image} className="tweet-image"></img>
               </div>
             </Link>
 
             <div className="tweet-content">
-              <div className="post-header">
-                <span className="tweet-name">{tweet.name}</span>{" "}
-                <span className="handle-time">
-                  @{tweet.username} {tweet.time}
-                </span>
-              </div>
+              <Link to="/userProfile" state={{ tweet }} className="link-user">
+                <div className="post-header">
+                  <span className="tweet-name">{tweet.name}</span>{" "}
+                  <span className="handle-time">
+                    @{tweet.username} {tweet.time}
+                  </span>
+                </div>
+              </Link>
               <p>{tweet.content}</p>
               <div className="tweet-actions">
                 <span>💬 {tweet.comments}</span>

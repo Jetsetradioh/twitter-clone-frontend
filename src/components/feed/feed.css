@@ -23,6 +23,10 @@
 .tweet-image{
   margin-right: 10px;
 }
+.link-user{
+  color: #ffffff;
+  text-decoration: none;
+}
 /* Tabs */
 .tab {
   background: none;

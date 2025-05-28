@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./sidebar.css";
-import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 
 const initialTrends = [
   { type: "trend", location: "Sweden", topic: "Samt", tweets: "2,840 Tweets" },
@@ -16,6 +15,8 @@ const Sidebar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [userResults, setUserResults] = useState([]);
   const [trends] = useState(initialTrends);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -46,7 +47,8 @@ const Sidebar = () => {
       type: "user",
       username: user.username,
       name: user.name,
-      profileImage: user.profileImage
+      profileImage: user.profileImage,
+      userId: user._id,
     })),
   ];
 
@@ -54,6 +56,14 @@ const Sidebar = () => {
     const value = e.target.value;
     setSearchTerm(value);
     setShowDropdown(value.length > 0);
+  };
+
+  const handleUserClick = (userId) => {
+    navigate("/userProfile", {
+      state: { tweet: { userId } },
+    });
+    setSearchTerm("");
+    setShowDropdown(false);
   };
 
   return (
@@ -76,18 +86,13 @@ const Sidebar = () => {
                 </div>
               ) : (
                 filteredResults.map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="sidebar-trend dropdown-item"
-                    onClick={() =>
-                      handleSelect(
-                        item.type === "user" ? item.username : item.topic
-                      )
-                    }
-                  >
+                  <div key={idx} className="sidebar-trend dropdown-item">
                     {item.type === "user" ? (
-                      <div className="user-search-result">
-                        <Link to={"/userprofile"} className="user-link">
+                      <div
+                        className="user-link"
+                        onClick={() => handleUserClick(item.userId)}
+                      >
+                        <div className="user-search-result">
                           <img
                             src={item.profileImage}
                             alt={item.username}
@@ -97,7 +102,7 @@ const Sidebar = () => {
                             <p className="sidebar-topic">{item.username}</p>
                             <p className="user-name">{item.name}</p>
                           </div>
-                        </Link>
+                        </div>
                       </div>
                     ) : (
                       <>
@@ -121,7 +126,6 @@ const Sidebar = () => {
 
       <div className="sidebar-sidebar">
         <h3 className="sidebar-title">Trends for you</h3>
-
         {trends
           .filter((item) => item.type === "trend")
           .map((item, index) => (
@@ -131,9 +135,7 @@ const Sidebar = () => {
                 <span className="sidebar-dots">⋯</span>
               </p>
               <p className="sidebar-topic">{item.topic}</p>
-              {item.tweets && (
-                <p className="sidebar-tweets">{item.tweets}</p>
-              )}
+              {item.tweets && <p className="sidebar-tweets">{item.tweets}</p>}
             </div>
           ))}
       </div>
