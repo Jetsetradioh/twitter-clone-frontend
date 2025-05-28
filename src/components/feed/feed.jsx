@@ -8,6 +8,8 @@ const Feed = () => {
 
   const [activeTab, setActiveTab] = useState("forYou");
   const [tweets, setTweets] = useState([]);
+  const [tweet, setTweet] = useState({ message: "" });
+  const isTooLong = tweet.message.length > 140;
 
   useEffect(() => {
     const getTweets = async () => {
@@ -22,11 +24,9 @@ const Feed = () => {
     getTweets();
   }, [activeTab, loggedUser?._id]);
 
-  const [tweet, setTweet] = useState({ message: "" });
-
   const submitTweet = async (e) => {
     e.preventDefault();
-    if (tweet.message.length > 140) return; // prevent submitting if too long
+    if (tweet.message.length > 140) return;
     const id = loggedUser?._id;
     const response = await fetch(`http://localhost:3000/api/tweet/${id}`, {
       method: "POST",
@@ -35,7 +35,20 @@ const Feed = () => {
     });
   };
 
-  const isTooLong = tweet.message.length > 140;
+  // ✅ Tidsvisning (ex: "2 min sedan", "1 dag sedan")
+  const timeAgo = (timestamp) => {
+    const now = new Date();
+    const posted = new Date(timestamp);
+    const seconds = Math.floor((now - posted) / 1000);
+
+    if (seconds < 60) return "just nu";
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) return `${minutes} min sedan`;
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `${hours} timme${hours > 1 ? "r" : ""} sedan`;
+    const days = Math.floor(hours / 24);
+    return `${days} dag${days > 1 ? "ar" : ""} sedan`;
+  };
 
   return (
     <div className="feed">
@@ -73,7 +86,12 @@ const Feed = () => {
               <button className="icon-button">😊</button>
               <button className="icon-button">📅</button>
             </div>
-            <input type="submit" className="post-button" value="Post" disabled={isTooLong} />
+            <input
+              type="submit"
+              className="post-button"
+              value="Post"
+              disabled={isTooLong}
+            />
           </div>
         </form>
       </div>
@@ -82,32 +100,42 @@ const Feed = () => {
       <div className="feed-show-posts">Show {tweets.length} posts</div>
 
       <div className="feed-posts">
-        {tweets.map((tweet, index) => (
-          <div className="tweet" key={index}>
-            <Link to="/userProfile" state={{ tweet }} className="link-user">
-              <div className="tweet-image-box">
-                <img src={tweet.image} className="tweet-image" alt="User avatar" />
-              </div>
-            </Link>
-
-            <div className="tweet-content">
+        {[...tweets]
+          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) 
+          .map((tweet, index) => (
+            <div className="tweet" key={index}>
               <Link to="/userProfile" state={{ tweet }} className="link-user">
-                <div className="post-header">
-                  <span className="tweet-name">{tweet.name}</span>{" "}
-                  <span className="handle-time">
-                    @{tweet.username} {tweet.time}
-                  </span>
+                <div className="tweet-image-box">
+                  <img
+                    src={tweet.image}
+                    className="tweet-image"
+                    alt="User avatar"
+                  />
                 </div>
               </Link>
-              <p className="tweet-content-text">{tweet.content}</p>
-              <div className="tweet-actions">
-                <span>💬 {tweet.comments.length}</span>
-                <span>🔁 {tweet.retweets}</span>
-                <span>❤️ {tweet.likes}</span>
+
+              <div className="tweet-content">
+                <Link
+                  to="/userProfile"
+                  state={{ tweet }}
+                  className="link-user"
+                >
+                  <div className="post-header">
+                    <span className="tweet-name">{tweet.name}</span>{" "}
+                    <span className="handle-time">
+                      @{tweet.username} · {timeAgo(tweet.createdAt)}
+                    </span>
+                  </div>
+                </Link>
+                <p className="tweet-content-text">{tweet.content}</p>
+                <div className="tweet-actions">
+                  <span>💬 {tweet.comments.length}</span>
+                  <span>🔁 {tweet.retweets}</span>
+                  <span>❤️ {tweet.likes}</span>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );
