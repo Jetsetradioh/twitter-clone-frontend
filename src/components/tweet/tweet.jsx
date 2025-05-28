@@ -56,7 +56,7 @@ const Tweet = ({ tweets, showInput = false }) => {
                   @{tweet.username} {tweet.time}
                 </span>
               </div>
-              <p>{tweet.content}</p>
+              <p className="tweet-content-text">{tweet.content}</p>
               <div className="tweet-actions">
                 <span>💬 {tweet.comments}</span>
                 <span>🔁 {tweet.retweets}</span>
