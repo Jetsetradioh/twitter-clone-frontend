@@ -33,7 +33,7 @@ describe("Profile-komponent", () => {
 
     render(<Profile />);
 
-    // Kontrollera att användarnamn, namn, bio etc. visas
+    // Kontrollerar att användarnamn, namn, bio etc. visas
     expect(await screen.findAllByText("Test Användare")).toHaveLength(2);
     expect(screen.getByText("@testuser")).toBeInTheDocument();
     expect(screen.getByText("Jag älskar kod")).toBeInTheDocument();
