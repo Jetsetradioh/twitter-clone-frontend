@@ -54,7 +54,7 @@ describe("Login Form", () => {
 
     setup();
 
-    // Skriver in användarnamn och gå vidare
+    // Skriver in användarnamn och går vidare
     fireEvent.change(screen.getByPlaceholderText("Username"), {
       target: { value: "testuser" },
     });

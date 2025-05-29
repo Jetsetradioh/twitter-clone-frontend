@@ -111,7 +111,9 @@ const UserProfile = () => {
   return (
     <div className="profile-container">
       <div className="profile-header">
-        <i id="profile-left-icon" className="fa-solid fa-arrow-left"></i>{" "}
+        <Link to="/home" className="back-arrow">
+          <i className="fa-solid fa-arrow-left"></i>
+        </Link>
         <div className="profile-header-box">
           <h2>{name}</h2>
           <h6>{tweetsCount} tweets </h6>

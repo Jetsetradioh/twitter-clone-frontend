@@ -23,6 +23,10 @@
 .tweet-image{
   margin-right: 10px;
 }
+.link-user{
+  color: #ffffff;
+  text-decoration: none;
+}
 /* Tabs */
 .tab {
   background: none;
@@ -148,4 +152,15 @@
   border-right: 1.5px solid #222;
   background-color: #000;
   min-height: 100vh;
+}
+/* When textarea is invalid (too long) */
+.post-box textarea.error {
+  border-color: red;
+  outline-color: red;
+  color: red;
+  font-size: 0,8 rem;
+}
+.tweet-content-text{
+  overflow-wrap: break-word;
+  width: 480px;
 }
