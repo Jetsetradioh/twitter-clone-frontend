@@ -18,16 +18,16 @@ const Feed = () => {
           `http://localhost:3000/api/tweet/${activeTab}/${loggedUser?._id}`
         );
         const data = await response.json();
+        console.log(data);
         setTweets(data);
       } catch {}
     };
     getTweets();
-  }, []);
+  }, [activeTab]);
 
   const [tweet, setTweet] = useState({ message: "" });
 
   const submitTweet = async (e) => {
-    e.preventDefault();
     const id = loggedUser?._id;
     const response = await fetch(`http://localhost:3000/api/tweet/${id}`, {
       method: "POST",

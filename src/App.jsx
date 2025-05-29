@@ -5,6 +5,7 @@ import Navbar from "./components/navbar/navbar";
 import Login from "./components/login/login";
 import Feed from "./components/feed/feed";
 import Profile from "./components/profile/profile";
+import EditProfile from "./components/profile/editProfile";
 import UserProfile from "./components/profile/userProfile";
 import { useEffect, useState } from "react";
 import Tweet from "./components/tweet/tweet";
@@ -67,6 +68,14 @@ function App() {
           element={
             <HomeLayout>
               <UserProfile />
+            </HomeLayout>
+          }
+        />
+        <Route
+          path="/editProfile"
+          element={
+            <HomeLayout>
+              <EditProfile />
             </HomeLayout>
           }
         />

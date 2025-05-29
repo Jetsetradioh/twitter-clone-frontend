@@ -1,9 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import "./profile.css";
 import Tweet from "../tweet/tweet";
+import { Link } from "react-router-dom";
 const Profile = () => {
   const storedUser = JSON.parse(localStorage.getItem("loggedUser"));
   const loggedUser = storedUser?.foundUser;
+
+  const [updatedUser, setUpdatedUser] = useState({});
+
+  useEffect(() => {
+    const updatedUser = async () => {
+      const fetchUser = await fetch(
+        `http://localhost:3000/api/update-user/${loggedUser._id}`
+      );
+      const data = await fetchUser.json();
+      setUpdatedUser(data);
+    };
+    updatedUser();
+  }, []);
 
   const [tweets, setTweets] = useState([]);
   const {
@@ -18,16 +32,18 @@ const Profile = () => {
     joinedDate,
     followersCount,
     followingCount,
-  } = loggedUser;
+  } = updatedUser;
 
   useEffect(() => {
     const getTweets = async () => {
-      const response = await fetch(`http://localhost:3000/api/tweets/${_id}`);
+      const response = await fetch(
+        `http://localhost:3000/api/tweets/${loggedUser._id}`
+      );
       const data = await response.json();
       setTweets(data);
     };
     getTweets();
-  }, [_id]);
+  }, [loggedUser]);
 
   return (
     <div className="profile-container">
@@ -41,7 +57,9 @@ const Profile = () => {
       <img className="profile-banner" src={bannerImage}></img>
       <div className="profile-image-box">
         <img className="profile-image" src={profileImage}></img>
-        <button className="profile-follow-btn">Follow</button>
+        <Link to="/editProfile">
+          <button className="profile-follow-btn">Edit</button>
+        </Link>
       </div>
       <div className="profile-body">
         <div className="profile-name-box">

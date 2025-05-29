@@ -5,10 +5,22 @@ import "./navbar.css";
 const Navbar = () => {
   const [activeItem, setActiveItem] = useState("Home");
   const [showLogout, setShowLogout] = useState(false);
+  const [updatedUser, setUpdatedUser] = useState({});
 
   //  Get the logged-in user from localStorage
   const storedUser = JSON.parse(localStorage.getItem("loggedUser"));
   const loggedUser = storedUser?.foundUser;
+
+  useEffect(() => {
+    const updatedUser = async () => {
+      const fetchUser = await fetch(
+        `http://localhost:3000/api/update-user/${loggedUser._id}`
+      );
+      const data = await fetchUser.json();
+      setUpdatedUser(data);
+    };
+    updatedUser();
+  }, [loggedUser]);
 
   const menu = [
     { name: "Home", icon: "🏠", path: "/home" },
@@ -73,10 +85,10 @@ const Navbar = () => {
         <Link to="/profile" className="nav-profile-dots">
           <div className="navbar-profile-info">
             <span className="navbar-profile-name">
-              {loggedUser?.name || "Guest"}
+              {updatedUser.name || "Guest"}
             </span>
             <span className="navbar-profile-username">
-              @{loggedUser?.username || "guest"}
+              @{updatedUser.username || "guest"}
             </span>
           </div>
         </Link>

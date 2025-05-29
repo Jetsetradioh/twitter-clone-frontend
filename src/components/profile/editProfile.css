@@ -1,0 +1,16 @@
+.edit-profile-container {
+}
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 10px;
+}
+.edit-form input {
+  height: 40px;
+  background-color: black;
+  border: solid grey 1px;
+  padding: 10px;
+  color: white;
+  border-radius: 2px;
+}
