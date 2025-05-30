@@ -1,12 +1,9 @@
-import React from "react";
+import "whatwg-fetch";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import Sidebar from "./sidebar";
 import { BrowserRouter } from "react-router-dom";
 
-// Hjälpfunktion för att wrappa med Router
 const renderWithRouter = (ui) => render(<BrowserRouter>{ui}</BrowserRouter>);
-
-// Mockar fetch
 beforeEach(() => {
   global.fetch = jest.fn((url) => {
     if (url.includes("/api/search/users")) {

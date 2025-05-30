@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import Signup from "./signup";
+import "whatwg-fetch";
 
 describe("Signup Form", () => {
   const setup = () => {

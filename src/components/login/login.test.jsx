@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import Login from "./login";
+import "whatwg-fetch";
 
 describe("Login Form", () => {
   const mockSetLoggedUser = jest.fn();

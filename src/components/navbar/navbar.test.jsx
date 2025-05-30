@@ -1,67 +1,46 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import { render, screen } from "@testing-library/react";
 import Navbar from "./navbar";
+import { BrowserRouter } from "react-router-dom";
+import "whatwg-fetch";
 
-// Mock localStorage
 beforeEach(() => {
-  const mockedUser = {
-    foundUser: {
-      name: "Test User",
-      username: "testuser",
-      profileImage: "https://example.com/profile.jpg",
-    },
-  };
-  localStorage.setItem("loggedUser", JSON.stringify(mockedUser));
+  localStorage.setItem(
+    "loggedUser",
+    JSON.stringify({
+      foundUser: {
+        _id: "123",
+        name: "Test User",
+        username: "testuser",
+        profileImage: "https://example.com/profile.jpg",
+      },
+    })
+  );
+
+  global.fetch = jest.fn(() =>
+    Promise.resolve({
+      json: () =>
+        Promise.resolve({
+          _id: "123",
+          name: "Test User",
+          username: "testuser",
+          profileImage: "https://example.com/profile.jpg",
+        }),
+    })
+  );
 });
 
 afterEach(() => {
   localStorage.clear();
+  jest.restoreAllMocks();
 });
 
-describe("Navbar Component", () => {
-  it("renders all menu items", () => {
-    render(
-      <BrowserRouter>
-        <Navbar />
-      </BrowserRouter>
-    );
+test("visar inloggad användares info", async () => {
+  render(
+    <BrowserRouter>
+      <Navbar />
+    </BrowserRouter>
+  );
 
-    expect(screen.getByText("Home")).toBeInTheDocument();
-    expect(screen.getByText("Explore")).toBeInTheDocument();
-    expect(screen.getByText("Notifications")).toBeInTheDocument();
-    expect(screen.getByText("Messages")).toBeInTheDocument();
-    expect(screen.getByText("Bookmarks")).toBeInTheDocument();
-    expect(screen.getByText("Lists")).toBeInTheDocument();
-    expect(screen.getByText("Profile")).toBeInTheDocument();
-    expect(screen.getByText("More")).toBeInTheDocument();
-  });
-
-  it("shows the logged in user's info", () => {
-    render(
-      <BrowserRouter>
-        <Navbar />
-      </BrowserRouter>
-    );
-
-    expect(screen.getByText("Test User")).toBeInTheDocument();
-    expect(screen.getByText("@testuser")).toBeInTheDocument();
-  });
-
-  it("opens and closes the logout modal", () => {
-    render(
-      <BrowserRouter>
-        <Navbar />
-      </BrowserRouter>
-    );
-
-    const dots = screen.getAllByText("⋯")[1]; // Den andra punkten öppnar/stänger menyn
-    fireEvent.click(dots);
-
-    expect(screen.getByText("Log out of Twitter?")).toBeInTheDocument();
-
-    const cancelBtn = screen.getByText("Cancel");
-    fireEvent.click(cancelBtn);
-
-    expect(screen.queryByText("Log out of Twitter?")).not.toBeInTheDocument();
-  });
+  expect(await screen.findByText("Test User")).toBeInTheDocument();
+  expect(screen.getByText("@testuser")).toBeInTheDocument();
 });

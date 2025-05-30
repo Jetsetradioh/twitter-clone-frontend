@@ -18,7 +18,6 @@ const Feed = () => {
           `http://localhost:3000/api/tweet/${activeTab}/${loggedUser?._id}`
         );
         const data = await response.json();
-        console.log(data);
         setTweets(data);
       } catch {}
     };
@@ -29,14 +28,13 @@ const Feed = () => {
     e.preventDefault();
     if (tweet.message.length > 140) return;
     const id = loggedUser?._id;
-    const response = await fetch(`http://localhost:3000/api/tweet/${id}`, {
+    await fetch(`http://localhost:3000/api/tweet/${id}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify([loggedUser, tweet]),
     });
   };
 
-  // ✅ Tidsvisning (ex: "2 min sedan", "1 dag sedan")
   const timeAgo = (timestamp) => {
     const now = new Date();
     const posted = new Date(timestamp);
@@ -53,7 +51,6 @@ const Feed = () => {
 
   return (
     <div className="feed">
-      {/* Tabs */}
       <div className="feed-header">
         <button
           className={`tab ${activeTab === "forYou" ? "active" : ""}`}
@@ -69,7 +66,6 @@ const Feed = () => {
         </button>
       </div>
 
-      {/* Post box */}
       <div className="post-box">
         <form onSubmit={submitTweet}>
           <textarea
@@ -97,7 +93,6 @@ const Feed = () => {
         </form>
       </div>
 
-      {/* Tweets list */}
       <div className="feed-show-posts">Show {tweets.length} posts</div>
 
       <div className="feed-posts">
