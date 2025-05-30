@@ -2,22 +2,31 @@ import React, { useState, useEffect } from "react";
 import "./sidebar.css";
 import { useNavigate } from "react-router-dom";
 
-const initialTrends = [
-  { type: "trend", location: "Sweden", topic: "Samt", tweets: "2,840 Tweets" },
-  { type: "trend", location: "Politics", topic: "China", tweets: "572K Tweets" },
-  { type: "trend", location: "Sweden", topic: "Israel", tweets: "10.2K Tweets" },
-  { type: "trend", location: "Sweden", topic: "#babygirl" },
-  { type: "trend", location: "Sweden", topic: "Newroz", tweets: "60.4K Tweets" },
-];
-
 const Sidebar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const [userResults, setUserResults] = useState([]);
-  const [trends] = useState(initialTrends);
+  const [trends, setTrends] = useState([]);
 
   const navigate = useNavigate();
 
+  const normalize = (str) => str.replace(/^#/, "").toLowerCase();
+
+  useEffect(() => {
+    const fetchTrends = async () => {
+      try {
+        const res = await fetch("/api/tweet/trends");
+        const data = await res.json();
+        setTrends(data);
+      } catch (err) {
+        console.error("Error fetching trends:", err);
+      }
+    };
+
+    fetchTrends();
+  }, []);
+
+  // Fetch users on search term
   useEffect(() => {
     const fetchUsers = async () => {
       if (searchTerm.length === 0) {
@@ -37,12 +46,15 @@ const Sidebar = () => {
     fetchUsers();
   }, [searchTerm]);
 
+  const filteredTrends = trends.filter((trend) =>
+    normalize(trend.topic).startsWith(normalize(searchTerm))
+  );
+
   const filteredResults = [
-    ...trends.filter(
-      (item) =>
-        item.type === "trend" &&
-        item.topic.toLowerCase().includes(searchTerm.toLowerCase())
-    ),
+    ...filteredTrends.map((trend) => ({
+      ...trend,
+      type: "trend",
+    })),
     ...userResults.map((user) => ({
       type: "user",
       username: user.username,
@@ -134,7 +146,7 @@ const Sidebar = () => {
                 {item.location} · Trending{" "}
                 <span className="sidebar-dots">⋯</span>
               </p>
-              <p className="sidebar-topic">{item.topic}</p>
+              <p className="sidebar-topic">#{item.topic}</p>
               {item.tweets && <p className="sidebar-tweets">{item.tweets}</p>}
             </div>
           ))}
