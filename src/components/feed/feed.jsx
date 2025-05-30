@@ -23,10 +23,9 @@ const Feed = () => {
       } catch {}
     };
     getTweets();
-  }, [activeTab, loggedUser?._id]);
+  }, [activeTab]);
 
   const submitTweet = async (e) => {
-    e.preventDefault();
     if (tweet.message.length > 140) return;
     const id = loggedUser?._id;
     const response = await fetch(`http://localhost:3000/api/tweet/${id}`, {
@@ -36,7 +35,7 @@ const Feed = () => {
     });
   };
 
-  // ✅ Tidsvisning (ex: "2 min sedan", "1 dag sedan")
+  // ✅ Tidsvisning (ex: 2 min sedan", "1 dag sedan")
   const timeAgo = (timestamp) => {
     const now = new Date();
     const posted = new Date(timestamp);
@@ -81,11 +80,11 @@ const Feed = () => {
           />
           <div className="post-actions">
             <div className="icon-row">
-              <button className="icon-button">🖼️</button>
-              <button className="icon-button">🎁</button>
-              <button className="icon-button">📊</button>
-              <button className="icon-button">😊</button>
-              <button className="icon-button">📅</button>
+              <span className="icon-button">🖼️</span>
+              <span className="icon-button">🎁</span>
+              <span className="icon-button">📊</span>
+              <span className="icon-button">😊</span>
+              <span className="icon-button">📅</span>
             </div>
             <input
               type="submit"

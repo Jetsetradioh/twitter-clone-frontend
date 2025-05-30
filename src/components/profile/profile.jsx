@@ -43,7 +43,7 @@ const Profile = () => {
       setTweets(data);
     };
     getTweets();
-  }, [loggedUser]);
+  }, []);
 
   return (
     <div className="profile-container">
