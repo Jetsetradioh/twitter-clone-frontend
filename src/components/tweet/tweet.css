@@ -20,12 +20,11 @@
   font-size: large;
 }
 .tweet {
-  display: grid;
-  grid-template-columns: 20% 70%;
-  padding: 0.75rem 1rem;
-  border-top: 1.5px solid #222;
-  margin: 0;
   display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  border-top: 1.5px solid #222;
+  padding: 0.75rem 1rem;
 }
 .tweet-content {
   width: 100%;
@@ -52,7 +51,17 @@
   margin-top: 0.75rem;
   gap: 1rem;
 }
-.tweet-content-text{
+.tweet-content-text {
   overflow-wrap: break-word;
   width: 480px;
+}
+
+.tweet-comment {
+  background-color: #1a1a1a;
+  color: #ccc;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  max-width: 100%;
+  word-break: break-word;
 }

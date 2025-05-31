@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./feed.css";
 import { Link } from "react-router-dom";
+import CommentForm from "../comment/CommentForm";
 
 const Feed = () => {
   const storedUser = JSON.parse(localStorage.getItem("loggedUser"));
@@ -9,6 +10,9 @@ const Feed = () => {
   const [activeTab, setActiveTab] = useState("forYou");
   const [tweets, setTweets] = useState([]);
   const [tweet, setTweet] = useState({ message: "" });
+  const [commentsMap, setCommentsMap] = useState({});
+  const [visibleComments, setVisibleComments] = useState({});
+
   const isTooLong = tweet.message.length > 140;
 
   useEffect(() => {
@@ -18,24 +22,48 @@ const Feed = () => {
           `http://localhost:3000/api/tweet/${activeTab}/${loggedUser?._id}`
         );
         const data = await response.json();
-        console.log(data);
         setTweets(data);
-      } catch {}
+      } catch (error) {
+        console.error("Fel vid hämtning av tweets:", error);
+      }
     };
     getTweets();
   }, [activeTab]);
 
   const submitTweet = async (e) => {
+    e.preventDefault();
     if (tweet.message.length > 140) return;
     const id = loggedUser?._id;
-    const response = await fetch(`http://localhost:3000/api/tweet/${id}`, {
+    await fetch(`http://localhost:3000/api/tweet/${id}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify([loggedUser, tweet]),
     });
+    setTweet({ message: "" });
   };
 
-  // ✅ Tidsvisning (ex: 2 min sedan", "1 dag sedan")
+  const toggleCommentVisibility = (tweetId) => {
+    setVisibleComments((prev) => ({
+      ...prev,
+      [tweetId]: !prev[tweetId],
+    }));
+  };
+
+  const handleCommentAdded = (tweetId, comment) => {
+    setCommentsMap((prev) => ({
+      ...prev,
+      [tweetId]: [...(prev[tweetId] || []), comment],
+    }));
+
+    setTweets((prev) =>
+      prev.map((t) =>
+        t._id === tweetId
+          ? { ...t, comments: [...(t.comments || []), comment] }
+          : t
+      )
+    );
+  };
+
   const timeAgo = (timestamp) => {
     const now = new Date();
     const posted = new Date(timestamp);
@@ -52,7 +80,6 @@ const Feed = () => {
 
   return (
     <div className="feed">
-      {/* Tabs */}
       <div className="feed-header">
         <button
           className={`tab ${activeTab === "forYou" ? "active" : ""}`}
@@ -68,7 +95,6 @@ const Feed = () => {
         </button>
       </div>
 
-      {/* Post box */}
       <div className="post-box">
         <form onSubmit={submitTweet}>
           <textarea
@@ -96,7 +122,6 @@ const Feed = () => {
         </form>
       </div>
 
-      {/* Tweets list */}
       <div className="feed-show-posts">Show {tweets.length} posts</div>
 
       <div className="feed-posts">
@@ -125,10 +150,45 @@ const Feed = () => {
                 </Link>
                 <p className="tweet-content-text">{tweet.content}</p>
                 <div className="tweet-actions">
-                  <span>💬 {tweet.comments.length}</span>
+                  <span
+                    style={{ cursor: "pointer" }}
+                    onClick={() => toggleCommentVisibility(tweet._id)}
+                  >
+                    💬{" "}
+                    {Array.isArray(tweet.comments) ? tweet.comments.length : 0}
+                  </span>
                   <span>🔁 {tweet.retweets}</span>
                   <span>❤️ {tweet.likes}</span>
                 </div>
+
+                {visibleComments[tweet._id] && (
+                  <>
+                    {Array.isArray(tweet.comments) &&
+                      tweet.comments.map((comment, idx) => (
+                        <div
+                          key={idx}
+                          style={{
+                            paddingLeft: "2rem",
+                            paddingTop: "0.5rem",
+                            color: "#ccc",
+                          }}
+                        >
+                          💬 <strong>{comment.name}</strong> @{comment.username}
+                          : {comment.content}
+                        </div>
+                      ))}
+
+                    <CommentForm
+                      tweetId={tweet._id}
+                      userId={loggedUser?._id}
+                      name={loggedUser?.name}
+                      username={loggedUser?.username}
+                      onCommentAdded={(comment) =>
+                        handleCommentAdded(tweet._id, comment)
+                      }
+                    />
+                  </>
+                )}
               </div>
             </div>
           ))}
