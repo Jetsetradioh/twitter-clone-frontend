@@ -25,6 +25,7 @@ beforeEach(() => {
 });
 
 describe("Profile-komponent", () => {
+  //detta behövs för att inte test suitsen ska faila.
   it("runs a simple test", () => {
     expect(true).toBe(true);
   });
